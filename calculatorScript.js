@@ -1,21 +1,30 @@
 const btn = document.querySelectorAll('.btn');
 const display = document.querySelector(".display");
+const operators = ["+", "-", "*", "/"]
 
 function updateDisplay(btnValue, btnType) {
+    let inputText = display.innerText;
+    let lastChar = inputText.charAt(inputText.length - 1);
+
     switch(btnType) {
         case "number":
-            display.innerText += btnValue;
+            inputText === "0" ? inputText = btnValue : inputText += btnValue;
             break;
         case "operator":
-            display.innerText += btnValue;
+            if (inputText != 0) {
+                operators.includes(lastChar) ? inputText = inputText.replace(/.$/, btnValue)  : inputText += btnValue;
+            }
             break;
         case "action":
-            if(btnValue === "C") display.innerText = "0";
+            if(inputText != 0) {
+                if(btnValue === "C") inputText = "0";
+            }
             break;
         case "dot":
-            display.innerText += btnValue;
+
             break;
     }
+    display.innerText = inputText;
 }
 
 btn.forEach(button => {
