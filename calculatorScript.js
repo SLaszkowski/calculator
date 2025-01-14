@@ -1,6 +1,6 @@
 const btn = document.querySelectorAll('.btn');
 const display = document.querySelector(".display");
-const operators = ["+", "-", "*", "/"]
+const operators = ["+", "-", "*", "/"];
 
 function updateDisplay(btnValue, btnType) {
     let inputText = display.innerText;
@@ -11,20 +11,22 @@ function updateDisplay(btnValue, btnType) {
             inputText === "0" ? inputText = btnValue : inputText += btnValue;
             break;
         case "operator":
-            if (inputText != 0) {
+            if (inputText != "0") {
                 operators.includes(lastChar) ? inputText = inputText.replace(/.$/, btnValue)  : inputText += btnValue;
             }
             break;
         case "action":
-            if(inputText != 0) {
+            if(inputText != "0") {
                 if(btnValue === "C") inputText = "0";
             }
             break;
         case "dot":
-
             break;
     }
-    display.innerText = inputText;
+    // Add spaces before and after operators
+    const inputTextForDisplay = inputText => inputText.replace(/\s+/g, "").replace(/([+\-*/])/g, " $1 ");
+
+    display.innerText = inputTextForDisplay(inputText);
 }
 
 btn.forEach(button => {
