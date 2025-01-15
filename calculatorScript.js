@@ -1,6 +1,6 @@
 const btn = document.querySelectorAll('.btn');
 const display = document.querySelector(".display");
-const operators = ["+", "-", "*", "/"];
+const operators = ["+", "-", "x", "/"];
 
 function updateDisplay(btnValue, btnType) {
     let inputText = display.innerText;
