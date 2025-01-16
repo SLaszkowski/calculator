@@ -24,7 +24,7 @@ function updateDisplay(btnValue, btnType) {
             break;
     }
     // Add spaces before and after operators
-    const inputTextForDisplay = inputText => inputText.replace(/\s+/g, "").replace(/([+\-*/])/g, " $1 ");
+    const inputTextForDisplay = inputText => inputText.replace(/\s+/g, "").replace(/([+\-*/x])/g, " $1 ");
 
     display.innerText = inputTextForDisplay(inputText);
 }
