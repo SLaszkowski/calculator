@@ -2,7 +2,7 @@ const btn = document.querySelectorAll('.btn');
 const display = document.querySelector(".display");
 const operators = ["+", "-", "x", "/"];
 
-const regOperators = /([+\-*/x])/g;
+const regOperators = /([+\-x/])/g;
 const regNumbers = /\d+$/;
 const regSpaces = /\s+/g;
 let valueIsAnswear = false;
@@ -14,7 +14,7 @@ function updateDisplay(btnValue, btnType) {
         removeSpaces: function() { return this.value.replace(regSpaces, ""); },
         notZero: function() { return this.value != "0"; },
         includesNumber: function() { return /\d+$/.test(this.value) },
-        includesOperator: function() { return /[+\-*/]/.test(this.value) },
+        includesOperator: function() { return /[+\-x/]/.test(this.value) },
         replaceOperator: function() { return this.value.replace(/.$/, btnValue) },
         addSpacesBetweenOperator: function() { return this.value.replace(regOperators, " $1 ") }
     };
@@ -38,20 +38,20 @@ function updateDisplay(btnValue, btnType) {
         case "action":
             if(inputText.notZero()) {
                 if(btnValue === "C") inputText.value = "0"
-                else if(inputText.includesNumber() && inputText.includesOperator()) inputText.value = count(inputText.value, btnValue);
+                else if(inputText.includesNumber() && inputText.includesOperator()) inputText.value = countResult(inputText.value);
             }
             break;
         case "dot":
             break;
     }
-
-    inputText.includesOperator() ? display.innerText = inputText.addSpacesBetweenOperator() : display.innerText = inputText.value;
+    inputText.includesOperator() && !(valueIsAnswear) ? display.innerText = inputText.addSpacesBetweenOperator() : display.innerText = inputText.value;
 }
 
-function count(inputText, btnValue) {
-    const operator = inputText.match(/[+\-*/]/);
-    const values = inputText.split("+").map(Number);
+function countResult(inputText) {
+    const operator = inputText.match(/[+\-x/]/);
+    const values = inputText.split(operator[0]).map(Number);
     valueIsAnswear = true;
+
     switch(operator[0]) {
         case "+":
             return values[0] + values[1];
