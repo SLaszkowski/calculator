@@ -5,6 +5,7 @@ const operators = ["+", "-", "x", "/"];
 const regOperators = /([+\-*/x])/g;
 const regNumbers = /\d+$/;
 const regSpaces = /\s+/g;
+let valueIsAnswear = false;
 
 function updateDisplay(btnValue, btnType) {
     const inputText = {
@@ -22,8 +23,9 @@ function updateDisplay(btnValue, btnType) {
     switch(btnType) {
         case "number":
             inputText.notZero()
-                ? inputText.value += btnValue
+                ? valueIsAnswear ? inputText.value = btnValue : inputText.value += btnValue
                 : inputText.value = btnValue
+            valueIsAnswear = false;
             break;
         case "operator":
             if (inputText.notZero()) {
@@ -31,6 +33,7 @@ function updateDisplay(btnValue, btnType) {
                     ? inputText.value = inputText.replaceOperator()
                     : inputText.value += btnValue;
             }
+            valueIsAnswear = false;
             break;
         case "action":
             if(inputText.notZero()) {
@@ -48,7 +51,7 @@ function updateDisplay(btnValue, btnType) {
 function count(inputText, btnValue) {
     const operator = inputText.match(/[+\-*/]/);
     const values = inputText.split("+").map(Number);
-    console.log(values)
+    valueIsAnswear = true;
     switch(operator[0]) {
         case "+":
             return values[0] + values[1];
