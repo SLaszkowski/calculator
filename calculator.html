@@ -4,30 +4,45 @@
         <meta charset="UTF-8">
         <title>Calculator</title>
         <link rel="stylesheet" href="./calculatorStyles.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     </head>
     <body>
         <div class="calculator">
             <div class="display">0</div>
             <div class="buttons">
-                <button class="btn" data-type="action" data-value="C">C</button>
-                <button class="btn" data-type="action" data-value="B">B</button>
+                <button class="btn" data-type="action" data-value="C" aria-label="Clear">
+                    <i class="fa-solid fa-c"></i>
+                </button>
+                <button class="btn" data-type="action" data-value="B" aria-label="Backspace">
+                    <i class="fa-solid fa-delete-left"></i>
+                </button>
                 <button class="btn" data-type="number" data-value="7">7</button>
                 <button class="btn" data-type="number" data-value="8">8</button>
                 <button class="btn" data-type="number" data-value="9">9</button>
-                <button class="btn" data-type="operator" data-value="/">/</button>
+                <button class="btn" data-type="operator" data-value="/">
+                    <i class="fa-solid fa-divide"></i>
+                </button>
                 <button class="btn" data-type="number" data-value="4">4</button>
                 <button class="btn" data-type="number" data-value="5">5</button>
                 <button class="btn" data-type="number" data-value="6">6</button>
-                <button class="btn" data-type="operator" data-value="x">x</button>
+                <button class="btn" data-type="operator" data-value="*">
+                    <i class="fa-solid fa-multiply"></i>
+                </button>
                 <button class="btn" data-type="number" data-value="1">1</button>
-                <button class="btn" data-type="number" data-value="2">2</button>
+                <button class="btn" data-type="number" data-value="2">2</i></button>
                 <button class="btn" data-type="number" data-value="3">3</button>
-                <button class="btn" data-type="operator" data-value="-">-</button>
+                <button class="btn" data-type="operator" data-value="-">
+                    <i class="fa-solid fa-minus"></i>
+                </button>
                 <button class="btn" data-type="number" data-value="0">0</button>
                 <button class="btn" data-type="dot" data-value=".">.</button>
                 <button class="btn" data-type="number" data-value="00">00</button>
-                <button class="btn" data-type="operator" data-value="+">+</button>
-                <button class="btn" data-type="action" data-value="=">=</button>
+                <button class="btn" data-type="operator" data-value="+">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                <button class="btn" data-type="action" data-value="=">
+                    <i class="fa-solid fa-equals"></i>
+                </button>
             </div>
         </div>
         <script src="./calculatorScript.js"></script>

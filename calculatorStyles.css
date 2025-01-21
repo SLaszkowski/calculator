@@ -45,6 +45,10 @@ body {
     border-radius: 10px;
 }
 
+.fa-solid {
+    pointer-events: none;
+}
+
 button[data-type="operator"]:hover {
     background-color: #1A1A2E
 }
