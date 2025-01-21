@@ -1,3 +1,4 @@
+'use strict';
 const btn = document.querySelectorAll('.btn');
 const display = document.querySelector(".display");
 const operators = ["+", "-", "*", "/"];
