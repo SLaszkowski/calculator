@@ -17,7 +17,8 @@ function updateDisplay(btnValue, btnType) {
         includesNumber: function() { return /\d+$/.test(this.value) },
         includesOperator: function() { return /[+\-*/]/.test(this.value) },
         replaceOperator: function() { return this.value.replace(/.$/, btnValue) },
-        addSpacesBetweenOperator: function() { return this.value.replace(regOperators, " $1 ") }
+        addSpacesBetweenOperator: function() { return this.value.replace(regOperators, " $1 ") },
+        resetDisplay: function() { return this.value = "0" }
     };
     inputText.removeSpaces();
 
@@ -25,7 +26,7 @@ function updateDisplay(btnValue, btnType) {
         case "number":
             inputText.notZero()
                 ? valueIsAnswer ? inputText.value = btnValue : inputText.value += btnValue
-                : btnValue === "00" ? inputText.value = "0" : inputText.value = btnValue
+                : btnValue === "00" ? inputText.resetDisplay() : inputText.value = btnValue
             valueIsAnswer = false;
             break;
         case "operator":
@@ -38,8 +39,9 @@ function updateDisplay(btnValue, btnType) {
             break;
         case "action":
             if(inputText.notZero()) {
-                if(btnValue === "C") inputText.value = "0"
-                else if(inputText.includesNumber() && inputText.includesOperator()) inputText.value = countResult(inputText.value);
+                if(btnValue === "C") inputText.resetDisplay()
+                else if(btnValue === "B") inputText.value.length === 1 ? inputText.resetDisplay() : inputText.value = (inputText.value).slice(0, -1)
+                else if(inputText.includesNumber() && inputText.includesOperator()) inputText.value = countResult(inputText.value)
             }
             break;
         case "dot":
