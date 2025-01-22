@@ -25,7 +25,7 @@ function updateDisplay(btnValue, btnType) {
         case "number":
             inputText.notZero()
                 ? valueIsAnswer ? inputText.value = btnValue : inputText.value += btnValue
-                : inputText.value = btnValue
+                : btnValue === "00" ? inputText.value = "0" : inputText.value = btnValue
             valueIsAnswer = false;
             break;
         case "operator":
