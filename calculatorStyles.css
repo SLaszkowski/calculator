@@ -50,23 +50,23 @@ body {
 }
 
 button[data-type="operator"]:hover {
-    background-color: #1A1A2E
+    background-color: #1A1A2E;
 }
 
 button[data-type="action"]:hover {
-    background-color: #1A1A2E
+    background-color: #1A1A2E;
 }
 
 button[data-type="number"]:hover {
-    background-color: #131343
+    background-color: #131343;
 }
 
 button[data-type="operator"] {
-    background-color: #131343
+    background-color: #131343;
 }
 
 button[data-type="action"] {
-    background-color: #131343
+    background-color: #131343;
 }
 
 button[data-value="="] {
