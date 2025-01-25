@@ -12,16 +12,19 @@ body, html {
 
 .calculator {
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #302f35;
     border: 4px solid #4A4A4A;
     border-radius: 30px;
     padding: 20px;
-    box-shadow: 0 0 40px 30px rgba(0, 0, 0, 0.2), 0 0 10px rgba(23, 26, 208, 0.1);
+    box-shadow: 0 0 40px 30px #1A1A2E;
     width: 400px;
     height: 600px;
 }
 
-.display {
+.displays {
     background-color: #1F1F1F;
     padding: 10px;
     color: #FFFFFF;
@@ -29,16 +32,23 @@ body, html {
     border-radius: 10px;
 }
 
+.secondDisplay {
+    color:#4A4A4A;
+}
+
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 50px 1fr 1fr 1fr 1fr 50px;
     width: 100%;
     height: 80%;
     gap: 3px;
-    margin-top: 30px;
 }
 
 .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 	background-color:#1A1A2E;
     color: #E0E0E0;
     padding: 10px;
@@ -63,6 +73,10 @@ button[data-type="number"]:hover {
     background-color: #131343;
 }
 
+button[data-type="dot"]:hover {
+    background-color: #131343;
+}
+
 button[data-type="operator"] {
     background-color: #131343;
 }
@@ -73,12 +87,15 @@ button[data-type="action"] {
 
 button[data-value="="] {
     grid-column: span 4;
+    height: 50px;
 }
 
 button[data-value="C"] {
     grid-column: span 2;
+    height: 50px;
 }
 
 button[data-value="B"] {
     grid-column: span 2;
+    height: 50px;
 }

@@ -1,6 +1,7 @@
 'use strict';
 const btn = document.querySelectorAll('.btn');
-const display = document.querySelector(".display");
+const mainDisplay = document.querySelector(".mainDisplay");
+const secondDisplay = document.querySelector(".secondDisplay");
 const operators = ["+", "-", "*", "/"];
 
 const regOperators = /([+\-*/])/g;
@@ -8,10 +9,12 @@ const regNumbers = /\d+$/;
 const regSpaces = /\s+/g;
 let valueIsAnswer = false;
 
+const resetSecondDisplay = () => secondDisplay.innerText = "";
+
 function updateDisplay(btnValue, btnType) {
     const inputText = {
-        value: display.innerText,
-        lastChar: display.innerText.charAt(display.innerText.length - 1),
+        value: mainDisplay.innerText,
+        lastChar: mainDisplay.innerText.charAt(mainDisplay.innerText.length - 1),
         removeSpaces: function() { return this.value.replace(regSpaces, ""); },
         notZero: function() { return this.value != "0"; },
         includesNumber: function() { return /\d+$/.test(this.value) },
@@ -20,6 +23,7 @@ function updateDisplay(btnValue, btnType) {
         addSpacesBetweenOperator: function() { return this.value.replace(regOperators, " $1 ") },
         resetDisplay: function() { return this.value = "0" }
     };
+
     inputText.removeSpaces();
 
     switch(btnType) {
@@ -39,15 +43,21 @@ function updateDisplay(btnValue, btnType) {
             break;
         case "action":
             if(inputText.notZero()) {
-                if(btnValue === "C") inputText.resetDisplay()
+                if(btnValue === "C") {
+                    inputText.resetDisplay()
+                    resetSecondDisplay();
+                }
                 else if(btnValue === "B") inputText.value.length === 1 ? inputText.resetDisplay() : inputText.value = (inputText.value).slice(0, -1)
-                else if(inputText.includesNumber() && inputText.includesOperator()) inputText.value = countResult(inputText.value)
+                else if(inputText.includesNumber() && inputText.includesOperator()) {
+                    secondDisplay.innerText = inputText.value + " =";
+                    inputText.value = countResult(inputText.value)
+                }
             }
             break;
         case "dot":
             break;
     }
-    inputText.includesOperator() && !(valueIsAnswer) ? display.innerText = inputText.addSpacesBetweenOperator() : display.innerText = inputText.value;
+    inputText.includesOperator() && !(valueIsAnswer) ? mainDisplay.innerText = inputText.addSpacesBetweenOperator() : mainDisplay.innerText = inputText.value;
 }
 
 function countResult(inputText) {
