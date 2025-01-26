@@ -58,6 +58,9 @@ function updateDisplay(btnValue, btnType) {
             }
             break;
         case "dot":
+            if(inputText.notZero()) {
+                if(!operators.includes(inputText.lastChar) && inputText.lastChar != ".") inputText.value += btnValue;
+            }
             break;
     }
     inputText.includesOperator() && !(valueIsAnswer) ? mainDisplay.innerText = inputText.addSpacesBetweenOperator() : mainDisplay.innerText = inputText.value;
