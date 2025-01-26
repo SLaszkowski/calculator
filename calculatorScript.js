@@ -35,9 +35,10 @@ function updateDisplay(btnValue, btnType) {
             break;
         case "operator":
             if (inputText.notZero()) {
+                if(valueIsAnswer) resetSecondDisplay();
                 operators.includes(inputText.lastChar)
                     ? inputText.value = inputText.replaceOperator()
-                    : inputText.value += btnValue;
+                    : inputText.value += btnValue
             }
             valueIsAnswer = false;
             break;
