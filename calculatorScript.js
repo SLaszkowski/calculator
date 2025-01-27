@@ -47,7 +47,7 @@ function updateDisplay(btnValue, btnType) {
         case "action":
             if(inputText.notZero()) {
                 if(btnValue === "C") {
-                    inputText.resetDisplay()
+                    inputText.resetDisplay();
                     resetSecondDisplay();
                 }
                 else if(btnValue === "B") inputText.value.length === 1 ? inputText.resetDisplay() : inputText.value = (inputText.value).slice(0, -1)
@@ -59,8 +59,12 @@ function updateDisplay(btnValue, btnType) {
             break;
         case "dot":
             if(inputText.notZero()) {
-                if(!operators.includes(inputText.lastChar) && inputText.lastChar != ".") inputText.value += btnValue;
+                !operators.includes(inputText.lastChar) && inputText.lastChar != "." && !inputText.value.includes(".")
+                    ? inputText.value += btnValue
+                    : console.log("")
             }
+            if(!inputText.value.includes(".")) resetSecondDisplay();
+            valueIsAnswer = false;
             break;
     }
     inputText.includesOperator() && !(valueIsAnswer) ? mainDisplay.innerText = inputText.addSpacesBetweenOperator() : mainDisplay.innerText = inputText.value;
