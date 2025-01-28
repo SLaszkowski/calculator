@@ -21,7 +21,8 @@ function updateDisplay(btnValue, btnType) {
         includesOperator: function() { return /[+\-*/]/.test(this.value) },
         replaceOperator: function() { return this.value.replace(/.$/, btnValue) },
         addSpacesBetweenOperator: function() { return this.value.replace(regOperators, " $1 ") },
-        resetDisplay: function() { return this.value = "0" }
+        resetDisplay: function() { return this.value = "0" },
+        amountOfDots: function() {return this.value.split(".").length - 1}
     };
 
     inputText.removeSpaces();
@@ -58,13 +59,13 @@ function updateDisplay(btnValue, btnType) {
             }
             break;
         case "dot":
-            if(inputText.notZero()) {
-                !operators.includes(inputText.lastChar) && inputText.lastChar != "." && !inputText.value.includes(".")
-                    ? inputText.value += btnValue
-                    : console.log("")
+            if(inputText.notZero() && inputText.amountOfDots() != 2) {
+                if((!valueIsAnswer && !operators.includes(inputText.lastChar) && inputText.lastChar != ".") ||
+                (valueIsAnswer && !inputText.value.includes("."))) {
+                        inputText.value += btnValue;
+                        resetSecondDisplay();
+                    }
             }
-            if(!inputText.value.includes(".")) resetSecondDisplay();
-            valueIsAnswer = false;
             break;
     }
     inputText.includesOperator() && !(valueIsAnswer) ? mainDisplay.innerText = inputText.addSpacesBetweenOperator() : mainDisplay.innerText = inputText.value;
