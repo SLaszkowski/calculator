@@ -22,7 +22,6 @@ function updateDisplay(btnValue, btnType) {
         replaceOperator: function() { return this.value.replace(/.$/, btnValue) },
         addSpacesBetweenOperator: function() { return this.value.replace(regOperators, " $1 ") },
         resetDisplay: function() { return this.value = "0" },
-        amountOfDots: function() {return this.value.split(".").length - 1}
     };
 
     inputText.removeSpaces();
@@ -59,17 +58,19 @@ function updateDisplay(btnValue, btnType) {
             }
             break;
         case "dot":
-            if(inputText.notZero() && inputText.amountOfDots() != 2) {
-                if((!valueIsAnswer && !operators.includes(inputText.lastChar) && inputText.lastChar != ".") ||
-                (valueIsAnswer && !inputText.value.includes("."))) {
-                        inputText.value += btnValue;
-                        resetSecondDisplay();
-                    }
+            if(inputText.lastChar !== "." && inputText.notZero()) {
+                if(inputText.includesOperator()) {
+                    if(Number.isInteger(splitByOperator(inputText.value)[1])) inputText.value += btnValue;
+                } else {
+                    if(Number.isInteger(Number(inputText.value))) inputText.value += btnValue;
+                }
             }
             break;
     }
     inputText.includesOperator() && !(valueIsAnswer) ? mainDisplay.innerText = inputText.addSpacesBetweenOperator() : mainDisplay.innerText = inputText.value;
 }
+
+const splitByOperator = inputText => inputText.split(inputText.match(/[+\-*/]/)[0]).map(Number);
 
 function countResult(inputText) {
     const operator = inputText.match(/[+\-*/]/);
