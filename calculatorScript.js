@@ -32,6 +32,7 @@ function updateDisplay(btnValue, btnType) {
                 ? valueIsAnswer ? inputText.value = btnValue : inputText.value += btnValue
                 : inputText.value = btnValue
             valueIsAnswer = false;
+            resetSecondDisplay();
             break;
         case "operator":
             if (inputText.notZero()) {
