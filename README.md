@@ -9,4 +9,4 @@ Especially created to use `flexbox`, `grid` and `box-sizing`.
 - division
 
 ## Demo
-<img src="assets/calculatorDemo.gif" style="border-radius: 80px;">
+![Calculator demo](assets/calculatorDemo.gif)
