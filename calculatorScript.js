@@ -54,7 +54,7 @@ function updateDisplay(btnValue, btnType) {
                 else if(btnValue === "B") inputText.value.length === 1 ? inputText.resetDisplay() : inputText.value = (inputText.value).slice(0, -1)
                 else if(inputText.includesNumber() && inputText.includesOperator()) {
                     secondDisplay.innerText = inputText.value + " =";
-                    inputText.value = countResult(inputText.value)
+                    inputText.value = countResult(inputText.value).toFixed(2);
                 }
             }
             break;
