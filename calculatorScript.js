@@ -11,6 +11,7 @@ const regSpaces = /\s+/g;
 let valueIsAnswer = false;
 
 const resetSecondDisplay = () => secondDisplay.innerText = "";
+const splitByOperator = inputText => inputText.split(inputText.match(/[+\-*/]/)[0]).map(Number);
 
 function updateDisplay(btnValue, btnType) {
     const inputText = {
@@ -71,8 +72,6 @@ function updateDisplay(btnValue, btnType) {
     }
     inputText.includesOperator() && !(valueIsAnswer) ? mainDisplay.innerText = inputText.addSpacesBetweenOperator() : mainDisplay.innerText = inputText.value;
 }
-
-const splitByOperator = inputText => inputText.split(inputText.match(/[+\-*/]/)[0]).map(Number);
 
 function countResult(inputText) {
     const operator = inputText.match(/[+\-*/]/);
