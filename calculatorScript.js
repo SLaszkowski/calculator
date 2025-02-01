@@ -83,13 +83,13 @@ function countResult(inputText) {
 
     switch(operator[0]) {
         case "+":
-            return a.plus(b);
+            return a.add(b);
         case "-":
-            return a.minus(b);
+            return a.sub(b);
         case "/":
-            return a.dividedBy(b);
+            return a.div(b);
         case "*":
-            return a.times(b);
+            return a.mul(b);
     }
 }
 
