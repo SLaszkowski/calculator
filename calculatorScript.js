@@ -1,4 +1,5 @@
 'use strict';
+
 const btn = document.querySelectorAll('.btn');
 const mainDisplay = document.querySelector(".mainDisplay");
 const secondDisplay = document.querySelector(".secondDisplay");
@@ -54,7 +55,7 @@ function updateDisplay(btnValue, btnType) {
                 else if(btnValue === "B") inputText.value.length === 1 ? inputText.resetDisplay() : inputText.value = (inputText.value).slice(0, -1)
                 else if(inputText.includesNumber() && inputText.includesOperator()) {
                     secondDisplay.innerText = inputText.value + " =";
-                    inputText.value = countResult(inputText.value).toFixed(2);
+                    inputText.value = countResult(inputText.value);
                 }
             }
             break;
@@ -77,16 +78,18 @@ function countResult(inputText) {
     const operator = inputText.match(/[+\-*/]/);
     const values = inputText.split(operator[0]).map(Number);
     valueIsAnswer = true;
+    const a = new Decimal(values[0]);
+    const b = new Decimal(values[1]);
 
     switch(operator[0]) {
         case "+":
-            return values[0] + values[1];
+            return a.plus(b);
         case "-":
-            return values[0] - values[1];
+            return a.minus(b);
         case "/":
-            return values[0] / values[1];
+            return a.dividedBy(b);
         case "*":
-            return values[0] * values[1];
+            return a.times(b);
     }
 }
 
