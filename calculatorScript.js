@@ -31,7 +31,7 @@ function updateDisplay(btnValue, btnType) {
     switch(btnType) {
         case "number":
             inputText.notZero()
-                ? valueIsAnswer ? inputText.value = btnValue : inputText.value += btnValue
+                ? valueIsAnswer && inputText.lastChar !== "." ? inputText.value = btnValue : inputText.value += btnValue
                 : inputText.value = btnValue
             valueIsAnswer = false;
             resetSecondDisplay();
