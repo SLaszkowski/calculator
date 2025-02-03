@@ -1,6 +1,6 @@
 # Calculator
 The first project was created to put into practice the basics of javascript, HTML, and CSS.
-Specially created to use `flexbox`, `grid`, and `box-sizing`.
+Then project is used to learn basics of autotests.
 
 ## Used technologies:
 Development: `Javascript, HTML, CSS`
