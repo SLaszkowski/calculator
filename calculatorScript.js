@@ -10,10 +10,10 @@ const regNumbers = /\d+$/;
 const regSpaces = /\s+/g;
 let valueIsAnswer = false;
 
-const resetSecondDisplay = () => secondDisplay.innerText = "";
-const splitByOperator = inputText => inputText.split(inputText.match(/[+\-*/]/)[0]).map(Number);
+export const resetSecondDisplay = () => secondDisplay.innerText = "";
+export const splitByOperator = inputText => inputText.split(inputText.match(/[+\-*/]/)[0]).map(Number);
 
-function updateDisplay(btnValue, btnType) {
+export function updateDisplay(btnValue, btnType) {
     const inputText = {
         value: mainDisplay.innerText,
         lastChar: mainDisplay.innerText.charAt(mainDisplay.innerText.length - 1),
@@ -73,7 +73,7 @@ function updateDisplay(btnValue, btnType) {
     inputText.includesOperator() && !(valueIsAnswer) ? mainDisplay.innerText = inputText.addSpacesBetweenOperator() : mainDisplay.innerText = inputText.value;
 }
 
-function countResult(inputText) {
+export function countResult(inputText) {
     const operator = inputText.match(/[+\-*/]/);
     const values = inputText.split(operator[0]).map(Number);
     valueIsAnswer = true;
