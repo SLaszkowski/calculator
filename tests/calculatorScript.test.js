@@ -1,11 +1,16 @@
-import { splitByOperator } from "../calculatorScript.js"
+import { splitByOperator, operators, countResult } from "../calculatorScript.js"
 
-const operators = []
 
 test("Should split string by operator", () => {
-    expect(splitByOperator("5+1")).toStrictEqual([5, 1]);
-    expect(splitByOperator("5-1")).toStrictEqual([5, 1]);
-    expect(splitByOperator("5*1")).toStrictEqual([5, 1]);
-    expect(splitByOperator("5/1")).toStrictEqual([5, 1]);
+    operators.forEach(operator => {
+        let arg = "5" + operator + "0";
+        expect(splitByOperator(arg)).toStrictEqual([5, 0]);
+    })
 })
 
+test("Should return result of math operation", () => {
+    expect(countResult("5+5")).toStrictEqual("10");
+    expect(countResult("5-5")).toStrictEqual("0");
+    expect(countResult("5/5")).toStrictEqual("1");
+    expect(countResult("5*5")).toStrictEqual("25");
+})
