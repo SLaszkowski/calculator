@@ -4,6 +4,7 @@ const btn = document.querySelectorAll('.btn');
 const mainDisplay = document.querySelector(".mainDisplay");
 const secondDisplay = document.querySelector(".secondDisplay");
 const operators = ["+", "-", "*", "/"];
+const notification = "Cannot divide by zero";
 
 const regOperators = /([+\-*/])/g;
 const regNumbers = /\d+$/;
@@ -17,15 +18,17 @@ export function updateDisplay(btnValue, btnType) {
     const inputText = {
         value: mainDisplay.innerText,
         lastChar: mainDisplay.innerText.charAt(mainDisplay.innerText.length - 1),
+        notificationVisible: function() { return this.value === notification },
         removeSpaces: function() { return this.value.replace(regSpaces, ""); },
         notZero: function() { return this.value != "0"; },
         includesNumber: function() { return /\d+$/.test(this.value) },
         includesOperator: function() { return /[+\-*/]/.test(this.value) },
         replaceOperator: function() { return this.value.replace(/.$/, btnValue) },
         addSpacesBetweenOperator: function() { return this.value.replace(regOperators, " $1 ") },
-        resetDisplay: function() { return this.value = "0" },
-    };
+        resetDisplay: function() { return this.value = "0" }
+    }
 
+    if(inputText.notificationVisible()) inputText.resetDisplay();
     inputText.removeSpaces();
 
     switch(btnType) {
@@ -56,7 +59,12 @@ export function updateDisplay(btnValue, btnType) {
                 else if(btnValue === "B") inputText.value.length === 1 ? inputText.resetDisplay() : inputText.value = (inputText.value).slice(0, -1)
                 else if(inputText.includesNumber() && inputText.includesOperator()) {
                     secondDisplay.innerText = inputText.value + " =";
-                    inputText.value = parseFloat(countResult(inputText.value).toFixed(10));
+                    let result = countResult(inputText.value);
+                    if(result) inputText.value = parseFloat(result.toFixed(10))
+                    else {
+                        inputText.value = "Cannot divide by zero";
+                        resetSecondDisplay();
+                    }
                 }
             }
             break;
@@ -86,7 +94,7 @@ export function countResult(inputText) {
         case "-":
             return a.sub(b);
         case "/":
-            return a.div(b);
+            return b.isZero() ? null : a.div(b);
         case "*":
             return a.mul(b);
     }
