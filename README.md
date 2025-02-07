@@ -1,10 +1,11 @@
 # Calculator
-The first project was created to put into practice the basics of javascript, HTML, and CSS.
-Then project is used to learn basics of autotests.
+Basic calculator application.
 
 ## Used technologies:
-Development: `Javascript, HTML, CSS`
-Testing: `JEST`
+- `Javascript (ES6+)`
+- `HTML`
+- `CSS`
+- `Unit tests (JEST)`
 
 ## Functions
 - adding
