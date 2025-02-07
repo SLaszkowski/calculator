@@ -4,7 +4,7 @@ import './icons.js';
 const btn = document.querySelectorAll('.btn');
 const mainDisplay = document.querySelector(".mainDisplay");
 const secondDisplay = document.querySelector(".secondDisplay");
-const operators = ["+", "-", "*", "/"];
+export const operators = ["+", "-", "*", "/"];
 const notification = "Cannot divide by zero";
 
 const regOperators = /([+\-*/])/g;
