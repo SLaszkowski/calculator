@@ -1,4 +1,5 @@
-'use strict';
+import Decimal from 'decimal.js';
+import './icons.js';
 
 const btn = document.querySelectorAll('.btn');
 const mainDisplay = document.querySelector(".mainDisplay");
