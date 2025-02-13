@@ -5,7 +5,7 @@ Basic calculator application.
 - `Vanilla Javascript (ES6+)`
 - `HTML`
 - `CSS`
-- `Unit tests (JEST)`
+- `Unit tests (Jest)`
 
 ## Functions
 - adding

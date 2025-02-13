@@ -8,7 +8,6 @@ export const operators = ["+", "-", "*", "/"];
 const notification = "Cannot divide by zero";
 
 const regOperators = /([+\-*/])/g;
-const regNumbers = /\d+$/;
 const regSpaces = /\s+/g;
 let valueIsAnswer = false;
 
