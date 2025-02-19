@@ -1,18 +1,32 @@
 
 export default class Logic {
-    constructor(a, b) {
-        this.a = a;
-        this.b = b;
+    constructor() {
+        this.currentValue = null;
+        this.previousValue = null;
+        this.operator = null;
+
+        this.operators = {
+            "+": (a, b) => a + b,
+            "-": (a, b) => a - b,
+            "*": (a, b) => a * b,
+            "/": (a, b) => a / b,
+        }
     }
 
-    add = (a, b) => a + b;
+    storeOperator(operator) {
+        if(this.operators[this.operator]) {
+            this.operator = operator;
+            this.currentValue = this.previousValue;
+            this.currentValue = "";
+        }
+    }
 
-    subtract = (a, b) => a - b;
+    calculate = () => this.operators[this.operator](this.previousValue, this.currentValue)
 
-    multiply = (a, b) => a * b;
+    reset() {
+        this.currentValue = "";
+        this.previousValue = "";
+        this.operator = null;
+    }
 
-    divide = (a, b) => {
-        if (b === 0) throw new Error("Cannot divide by zero");
-        return a / b;
-    };
 }
