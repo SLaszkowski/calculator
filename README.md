@@ -3,7 +3,7 @@ Basic calculator application.
 
 ## Used technologies:
 - `Vanilla Javascript (ES6+)`
-- `HTML`
+- `HTML5`
 - `CSS`
 - `Unit tests (Jest)`
 
