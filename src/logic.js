@@ -1,8 +1,7 @@
-
 export default class Logic {
     constructor() {
-        this.currentValue = null;
-        this.previousValue = null;
+        this.currentValue = "";
+        this.previousValue = "";
         this.operator = null;
 
         this.operators = {
@@ -13,10 +12,19 @@ export default class Logic {
         }
     }
 
+    storeValue(value) {
+        this.previousValue = this.currentValue;
+        this.currentValue = value;
+    }
+
+    appendValue(value) {
+        this.currentValue += value;
+    }
+
     storeOperator(operator) {
         if(this.operators[this.operator]) {
             this.operator = operator;
-            this.currentValue = this.previousValue;
+            this.previousValue = this.currentValue;
             this.currentValue = "";
         }
     }
