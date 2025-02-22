@@ -17,12 +17,12 @@ export default class Logic {
         this.currentValue = value;
     }
 
-    appendValue(value) {
-        this.currentValue += value;
+    appendValue(valueAsString) {
+        this.currentValue += valueAsString;
     }
 
     storeOperator(operator) {
-        if(this.operators[this.operator]) {
+        if(this.operators[operator]) {
             this.operator = operator;
             this.previousValue = this.currentValue;
             this.currentValue = "";
