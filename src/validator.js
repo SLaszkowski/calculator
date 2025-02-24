@@ -1,9 +1,9 @@
 export default class Validator {
     static parseStringToNumber(string) {
         if (typeof string !== "string") {
-            throw new TypeError(`Invalid input. Expected a valid string, but got: ${typeof string}`)
+            throw new TypeError(`Invalid input. Expected a valid string, but got: ${typeof string}`);
         }
-        const number = parseFloat(string)
+        const number = parseFloat(string);
         return isNaN(number) ? null : number;
     }
 

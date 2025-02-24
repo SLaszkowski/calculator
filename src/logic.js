@@ -3,12 +3,15 @@ export default class Logic {
         this.currentValue = "";
         this.previousValue = "";
         this.operator = null;
+        this.result = null;
 
         this.operators = {
             "+": (a, b) => a + b,
             "-": (a, b) => a - b,
             "*": (a, b) => a * b,
-            "/": (a, b) => a / b,
+            "/": (a, b) => {
+                b === 0 ? null : a / b;
+            },
         }
     }
 
@@ -29,7 +32,9 @@ export default class Logic {
         }
     }
 
-    calculate = () => this.operators[this.operator](this.previousValue, this.currentValue)
+    calculate(a, b) {
+        this.result = this.operators[this.operator](a, b);
+    }
 
     reset() {
         this.currentValue = "";

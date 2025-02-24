@@ -1,3 +1,4 @@
+import "../icons.js"
 import Display from "./display.js";
 import Logic from "./logic.js";
 import Validator from "./validator.js";
@@ -22,9 +23,9 @@ buttons.forEach(button => {
                 logic.storeOperator(btnValue);
                 break;
             case "action":
-                Validator.parseStringToNumber(logic.currentValue);
-                Validator.parseStringToNumber(logic.previousValue);
-                const result = logic.calculate();
+                const a = Validator.parseStringToNumber(logic.currentValue);
+                const b = Validator.parseStringToNumber(logic.previousValue);
+                if(a && b && logic.operator) result = logic.calculate(a, b);
                 break;
             case "dot":
                 break;

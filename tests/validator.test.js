@@ -15,7 +15,8 @@ const errorData = [
 
 const nullData = [
     ["abcd", null],
-    ["ajay719", null]
+    ["ajay719", null],
+    ["", null]
 ]
 
 const correctData = [
