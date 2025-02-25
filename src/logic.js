@@ -4,15 +4,18 @@ export default class Logic {
         this.previousValue = "";
         this.operator = null;
         this.result = null;
+        this.precision = 9;
 
         this.operators = {
-            "+": (a, b) => a + b,
-            "-": (a, b) => a - b,
-            "*": (a, b) => a * b,
-            "/": (a, b) => {
-                b === 0 ? null : a / b;
-            },
+            "+": (a, b) => this.fixFloat(a + b),
+            "-": (a, b) => this.fixFloat(a - b),
+            "*": (a, b) => this.fixFloat(a * b),
+            "/": (a, b) => b === 0 ? null : this.fixFloat(a / b),
         }
+    }
+
+    fixFloat(value) {
+        return parseFloat(value.toFixed(9));
     }
 
     storeValue(value) {
@@ -33,13 +36,16 @@ export default class Logic {
     }
 
     calculate(a, b) {
-        this.result = this.operators[this.operator](a, b);
+        if(this.operator) {
+            this.result = this.operators[this.operator](a, b);
+        }
     }
 
     reset() {
         this.currentValue = "";
         this.previousValue = "";
         this.operator = null;
+        this.result = null;
     }
 
 }

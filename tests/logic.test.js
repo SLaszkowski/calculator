@@ -22,19 +22,19 @@ const calculateData = [
     [-3, "*", 4, -12],
     [0, "*", 50, 0],
     [2.5, "*", 4, 10],
-    [0.123456789, "*", 0.987654321, 0.121932632],
+    [0.123456789, "*", 0.987654321, 0.121932631],
 
     [10, "/", 2, 5],
     [10, "/", 3, 3.333333333],
     [0, "/", 5, 0],
-    [0.123456789, "/", 0.987654321, 0.125],
-    [1.23456789, "/", 3.141592653, 0.393221267],
+    [0.123456789, "/", 0.987654321, 0.124999999],
+    [1.23456789, "/", 3.141592653, 0.392975165],
 
     [5, "+", 5.5, 10.5],
     [-3.5, "+", 4, 0.5],
     [3, "*", 3.14, 9.42],
     [-2.5, "*", 4, -10],
-    [100, "/", 3.14, 31.847229259],
+    [100, "/", 3.14, 31.847133758],
 
     [10, "/", 0, null],
     [-5, "/", 0, null],
@@ -45,8 +45,8 @@ const calculateData = [
 
     [1.234567891, "+", 0.987654321, 2.222222212],
     [1.234567891, "-", 0.987654321, 0.24691357],
-    [1.234567891, "*", 0.987654321, 1.219612967],
-    [1.234567891, "/", 0.987654321, 1.25]
+    [-1.234567891, "*", 0.987654321, -1.219326312],
+    [1.234567891, "/", 0.987654321, 1.24999999]
 ];
 
 
@@ -55,6 +55,21 @@ describe("Logic class", () => {
 
     beforeEach(() => {
         logic = new Logic();
+    })
+
+    test("should initialize with default values", () => {
+        expect(logic.currentValue).toBe("");
+        expect(logic.previousValue).toBe("");
+        expect(logic.operator).toBe(null);
+        expect(logic.result).toBe(null);
+        expect(logic.precision).toBe(9);
+    });
+
+    describe("fixFloat", () => {
+        test("should return fixed float", () => {
+            expect(logic.fixFloat(0.1 + 0.2)).toBe(0.3);
+            expect(logic.fixFloat(3.141592653 + 2.718281828)).toBe(5.859874481);
+        })
     })
 
     describe("appendValue", () => {
@@ -72,6 +87,14 @@ describe("Logic class", () => {
             expect(logic.previousValue).toBe("55");
             expect(logic.currentValue).toBe("");
         })
+
+        test("should handle invalid operator", () => {
+            logic.currentValue = "55";
+            logic.storeOperator("%");
+            expect(logic.operator).toBe(null);
+            expect(logic.previousValue).toBe("");
+            expect(logic.currentValue).toBe("55");
+        });
     })
 
     describe("calculate", () => {
@@ -80,5 +103,10 @@ describe("Logic class", () => {
             logic.calculate(a, b);
             expect(logic.result).toBe(result);
         })
+
+        test("should return null if operator is not set", () => {
+            logic.calculate(5, 5)
+            expect(logic.result).toBe(null);
+        });
     })
 })
