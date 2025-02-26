@@ -20,6 +20,12 @@ buttons.forEach(button => {
                 logic.appendValue(btnValue);
                 break;
             case "operator":
+                // Second operator passed
+                if(logic.currentValue) {
+                    const a = Validator.parseStringToNumber(logic.currentValue);
+                    const b = Validator.parseStringToNumber(logic.previousValue);
+                    if(a && b && logic.operator) logic.result = logic.calculate(a, b);
+                }
                 logic.storeOperator(btnValue);
                 break;
             case "action":
