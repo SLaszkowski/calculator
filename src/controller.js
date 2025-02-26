@@ -29,9 +29,13 @@ buttons.forEach(button => {
                 logic.storeOperator(btnValue);
                 break;
             case "action":
-                const a = Validator.parseStringToNumber(logic.currentValue);
-                const b = Validator.parseStringToNumber(logic.previousValue);
-                if(a && b && logic.operator) result = logic.calculate(a, b);
+                if(btnValue === "clear") logic.reset();
+                else if(btnValue === "delete") logic.delete();
+                else if(btnValue === "equal") {
+                    const a = Validator.parseStringToNumber(logic.currentValue);
+                    const b = Validator.parseStringToNumber(logic.previousValue);
+                    if(a && b && logic.operator) logic.result = logic.calculate(a, b);
+                }
                 break;
             case "dot":
                 break;

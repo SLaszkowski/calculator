@@ -49,6 +49,18 @@ const calculateData = [
     [1.234567891, "/", 0.987654321, 1.24999999]
 ];
 
+const deleteData = [
+    ["123456789", "12345678"],
+    ["12345678", "1234567"],
+    ["", ""],
+    ["1", ""],
+    ["0", ""],
+    ["1.53", "1.5"],
+    ["-59.4", "-59."],
+    ["-59.", "-59"],
+    ["-59", "-5"],
+    ["-5", "-"]
+]
 
 describe("Logic class", () => {
     let logic;
@@ -109,4 +121,23 @@ describe("Logic class", () => {
             expect(logic.result).toBe(null);
         });
     })
+
+    describe("reset", () => {
+        test("should reset values", () => {
+            logic.reset();
+            expect(logic.currentValue).toBe("");
+            expect(logic.previousValue).toBe("");
+            expect(logic.operator).toBe(null);
+            expect(logic.result).toBe(null);
+        })
+    })
+
+    describe("delete", () => {
+        test.each(deleteData)("%p after delete last char should be %p", (value, slicedValue) => {
+            logic.currentValue = value;
+            logic.delete();
+            expect(logic.currentValue).toBe(slicedValue);
+        })
+    })
+
 })
