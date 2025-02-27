@@ -18,11 +18,6 @@ export default class Logic {
         return parseFloat(value.toFixed(9));
     }
 
-    storeValue(value) {
-        this.previousValue = this.currentValue;
-        this.currentValue = value;
-    }
-
     appendValue(valueAsString) {
         this.currentValue += valueAsString;
     }
@@ -46,6 +41,10 @@ export default class Logic {
         this.previousValue = "";
         this.operator = null;
         this.result = null;
+    }
+
+    delete() {
+        this.currentValue = this.currentValue.slice(0, -1);
     }
 
 }
