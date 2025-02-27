@@ -1,55 +1,74 @@
-import Validator from "../src/validator";
+import { parseStringToNumber, numberToString  }  from "../src/validator";
 
-const errorData = [
-    [10, TypeError, "Invalid input. Expected a valid string, but got: number"],
-    [-10, TypeError, "Invalid input. Expected a valid string, but got: number"],
-    [4.232, TypeError, "Invalid input. Expected a valid string, but got: number"],
-    [Infinity, TypeError, "Invalid input. Expected a valid string, but got: number"],
-    [-Infinity, TypeError, "Invalid input. Expected a valid string, but got: number"],
-    [null, TypeError, "Invalid input. Expected a valid string, but got: object"],
-    [undefined, TypeError, "Invalid input. Expected a valid string, but got: undefined"],
-    [NaN, TypeError, "Invalid input. Expected a valid string, but got: number"],
-    [[], TypeError, "Invalid input. Expected a valid string, but got: object"],
-    [{}, TypeError, "Invalid input. Expected a valid string, but got: object"],
-]
-
-const nullData = [
+const parseStringToNumberData = [
     ["abcd", null],
     ["ajay719", null],
-    ["", null]
-]
-
-const correctData = [
-    ["123sad", 123],
+    ["", null],
+    [10, null],
+    [-10, null],
+    [4.232, null],
+    [Infinity, null],
+    [-Infinity, null],
+    [null, null],
+    [undefined, null],
+    [NaN, null],
+    [[], null],
+    [{}, null],
+    ["123sad", null],
+    ["-0", null],
+    ["-0.0", null],
     ["10.5", 10.5],
     ["10", 10],
     ["21.23456342", 21.23456342],
-    ["-21.23456342", -21.23456342]
+    ["-21.23456342", -21.23456342],
+    ["0", 0],
+    ["0.0", 0],
+    [" 123 ", 123],
+    [" 10.5 ", 10.5],
+    [" 10 ", 10],
+    [" 21.23456342 ", 21.23456342],
+    [" -21.23456342 ", -21.23456342],
+    ["0.2300", 0.23],
+    ["  0.2300 ", 0.23],
+    ["-0.2300", -0.23],
+    ["12.590", 12.59],
+    ["-12.590", -12.59],
+    ["0.0000001", 0.0000001],
+    ["-0.0000001", -0.0000001]
 ]
 
-describe("Validator.parseStringToNumber", () => {
-    describe("returns null", () => {
-        test.each(nullData)(
-            "when input is %p should return %p",
-            (inputValue, expectedResult) => {
-            expect(Validator.parseStringToNumber(inputValue)).toBe(expectedResult)
-        })
-    })
+const numberToStringData = [
+    [123, "123"],
+    [10.5, "10.5"],
+    [10, "10"],
+    [21.23456342, "21.23456342"],
+    [-21.23456342, "-21.23456342"],
+    [0, "0"],
+    [0.0, "0"],
+    [12.590, "12.59"],
+    [-12.590, "-12.59"],
+    [0.2300, "0.23"],
+    [Infinity, ""],
+    [-Infinity, ""],
+    [NaN, ""],
+    [null, ""],
+    [undefined, ""],
+    [[], ""],
+    [{}, ""]
+]
 
-    describe("parses correct values", () => {
-        test.each(correctData)(
-            "when input is %p should return %p",
-            (inputValue, expectedResult) => {
-            expect(Validator.parseStringToNumber(inputValue)).toBe(expectedResult)
-        })
+describe("parseStringToNumber", () => {
+    test.each(parseStringToNumberData)(
+        "when input is %p should return %p",
+        (inputValue, expectedResult) => {
+        expect(parseStringToNumber(inputValue)).toBe(expectedResult);
     })
+});
 
-    describe("throws error with message", () => {
-        test.each(errorData)(
-            "when input is %p should throw %p with error message %s",
-            (inputValue, error, errorMessage) => {
-            expect(() => Validator.parseStringToNumber(inputValue)).toThrow(error);
-            expect(() => Validator.parseStringToNumber(inputValue)).toThrow(errorMessage);
-        })
+describe("numberToString", () => {
+    test.each(numberToStringData)(
+        "when input is %p should return %p",
+        (inputValue, expectedResult) => {
+        expect(numberToString(inputValue)).toBe(expectedResult);
     })
-})
+});

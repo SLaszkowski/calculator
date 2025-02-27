@@ -1,16 +1,14 @@
-export default class Validator {
-    static parseStringToNumber(string) {
-        if (typeof string !== "string") {
-            throw new TypeError(`Invalid input. Expected a valid string, but got: ${typeof string}`);
-        }
-        const number = parseFloat(string);
-        return isNaN(number) ? null : number;
+export function parseStringToNumber(string) {
+    if (typeof string !== "string" || !/^-?\d*\.?\d+$/.test(string.trim())) {
+        return null;
     }
+    const number = parseFloat(string);
+    return isNaN(number) || Object.is(number, -0) ? null : number;
+}
 
-    static numberToString(number) {
-        if (typeof number !== "number" || isNaN(number)) {
-            throw new TypeError(`Invalid input. Expected a valid number, but got: ${typeof number}`);
-        }
-        return number.toString();
+export function numberToString(number) {
+    if (typeof number !== "number" || !isFinite(number)) {
+        return "";
     }
+    return number.toString();
 }
