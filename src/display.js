@@ -5,8 +5,8 @@ export default class Display {
         this.secondDisplay = secondDisplay;
     }
 
-    updateMainDisplay(value) {
-        this.mainDisplay.innerText += value;
+    updateMainDisplay(previousValue, operator, currentValue) {
+        this.mainDisplay.innerText = previousValue + operator + currentValue;
     }
 
     updateSecondDisplay(value) {

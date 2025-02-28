@@ -17,6 +17,7 @@ buttons.forEach(button => {
         switch(btnType) {
             case "number":
                 logic.appendValue(btnValue);
+                display.updateMainDisplay(logic.previousValue, logic.operator, logic.currentValue);
                 break;
             case "operator":
                 // Second operator passed
@@ -26,9 +27,13 @@ buttons.forEach(button => {
                     if(a && b && logic.operator) logic.result = logic.calculate(a, b);
                 }
                 logic.storeOperator(btnValue);
+                display.updateMainDisplay(logic.previousValue, logic.operator, logic.currentValue);
                 break;
             case "action":
-                if(btnValue === "clear") logic.reset();
+                if(btnValue === "clear") {
+                    logic.reset();
+                    display.clearBothDisplays();
+                }
                 else if(btnValue === "delete") logic.delete();
                 else if(btnValue === "equal") {
                     const a = parseStringToNumber(logic.currentValue);
