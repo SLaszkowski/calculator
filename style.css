@@ -96,17 +96,17 @@ button[data-type="action"] {
     background-color: #131343;
 }
 
-button[data-value="="] {
+button[data-value="equal"] {
     grid-column: span 4;
     height: 50px;
 }
 
-button[data-value="C"] {
+button[data-value="clear"] {
     grid-column: span 2;
     height: 50px;
 }
 
-button[data-value="B"] {
+button[data-value="delete"] {
     grid-column: span 2;
     height: 50px;
 }

@@ -1,7 +1,6 @@
-import "../icons.js"
 import Display from "./display.js";
 import Logic from "./logic.js";
-import { parseStringToNumber, numberToString  }  from "../src/validator";
+import { parseStringToNumber, numberToString  }  from "./validator.js";
 
 const buttons = document.querySelectorAll('.btn');
 const mainDisplay = document.querySelector(".mainDisplay");
