@@ -72,7 +72,7 @@ describe("Logic class", () => {
     test("should initialize with default values", () => {
         expect(logic.currentValue).toBe("");
         expect(logic.previousValue).toBe("");
-        expect(logic.operator).toBe(null);
+        expect(logic.operator).toBe("");
         expect(logic.result).toBe(null);
         expect(logic.precision).toBe(9);
     });
@@ -103,7 +103,7 @@ describe("Logic class", () => {
         test("should handle invalid operator", () => {
             logic.currentValue = "55";
             logic.storeOperator("%");
-            expect(logic.operator).toBe(null);
+            expect(logic.operator).toBe("");
             expect(logic.previousValue).toBe("");
             expect(logic.currentValue).toBe("55");
         });
@@ -127,7 +127,7 @@ describe("Logic class", () => {
             logic.reset();
             expect(logic.currentValue).toBe("");
             expect(logic.previousValue).toBe("");
-            expect(logic.operator).toBe(null);
+            expect(logic.operator).toBe("");
             expect(logic.result).toBe(null);
         })
     })

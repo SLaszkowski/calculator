@@ -2,7 +2,7 @@ export default class Logic {
     constructor() {
         this.currentValue = "";
         this.previousValue = "";
-        this.operator = null;
+        this.operator = "";
         this.result = null;
         this.precision = 9;
 
@@ -39,7 +39,7 @@ export default class Logic {
     reset() {
         this.currentValue = "";
         this.previousValue = "";
-        this.operator = null;
+        this.operator = "";
         this.result = null;
     }
 
