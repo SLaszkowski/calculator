@@ -21,11 +21,15 @@ buttons.forEach(button => {
                 break;
             case "operator":
                 // Second operator passed
-                if(logic.currentValue) {
+                if(logic.currentValue && logic.previousValue && logic.operator) {
                     const a = parseStringToNumber(logic.currentValue);
                     const b = parseStringToNumber(logic.previousValue);
-                    if(a && b && logic.operator) logic.result = logic.calculate(a, b);
+                    if(a && b && logic.operator) {
+                        logic.calculate(a, b);
+                        logic.result = numberToString(logic.result);
+                    }
                 }
+                logic.storeValues();
                 logic.storeOperator(btnValue);
                 display.updateMainDisplay(logic.previousValue, logic.operator, logic.currentValue);
                 break;
@@ -38,7 +42,12 @@ buttons.forEach(button => {
                 else if(btnValue === "equal") {
                     const a = parseStringToNumber(logic.currentValue);
                     const b = parseStringToNumber(logic.previousValue);
-                    if(a && b && logic.operator) logic.result = logic.calculate(a, b);
+                    if(a && b && logic.operator) {
+                        logic.calculate(a, b);
+                        logic.result = numberToString(logic.result);
+                        logic.storeValues();
+                        display.updateMainDisplay(logic.previousValue, logic.operator, logic.currentValue);
+                    }
                 }
                 break;
             case "dot":

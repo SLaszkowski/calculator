@@ -96,8 +96,6 @@ describe("Logic class", () => {
             logic.currentValue = "55";
             logic.storeOperator(operator);
             expect(logic.operator).toBe(operator);
-            expect(logic.previousValue).toBe("55");
-            expect(logic.currentValue).toBe("");
         })
 
         test("should handle invalid operator", () => {

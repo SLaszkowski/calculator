@@ -22,12 +22,20 @@ export default class Logic {
         this.currentValue += valueAsString;
     }
 
-    storeOperator(operator) {
-        if(this.operators[operator]) {
-            this.operator = operator;
+    storeValues() {
+        if(this.result) {
+            this.previousValue = this.result;
+            this.currentValue = "";
+            this.result = null;
+            this.operator = "";
+        } else {
             this.previousValue = this.currentValue;
             this.currentValue = "";
         }
+    }
+
+    storeOperator(operator) {
+        if(this.operators[operator]) this.operator = operator;
     }
 
     calculate(a, b) {
