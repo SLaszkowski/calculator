@@ -6,8 +6,10 @@ export default class Display {
     }
 
     updateMainDisplay(previousValue, operator, currentValue) {
-        this.mainDisplay.innerText = previousValue + operator + currentValue;
+        this.mainDisplay.innerText = previousValue + this.showOperator(operator) + currentValue;
     }
+
+    showOperator = operator => operator ? ` ${operator} ` : operator;
 
     updateSecondDisplay(value) {
         this.mainDisplay.innerText += value;

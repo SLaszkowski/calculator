@@ -28,14 +28,18 @@ export default class Logic {
             this.currentValue = "";
             this.result = null;
             this.operator = "";
-        } else {
+        } else if(this.currentValue && this.currentValue !== "-") {
             this.previousValue = this.currentValue;
             this.currentValue = "";
         }
     }
 
     storeOperator(operator) {
-        if(this.operators[operator]) this.operator = operator;
+        if(this.previousValue) {
+            if(this.operators[operator]) this.operator = operator;
+        } else if(!this.currentValue && operator === "-") {
+            this.appendValue(operator);
+        }
     }
 
     calculate(a, b) {

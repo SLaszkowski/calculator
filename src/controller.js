@@ -22,8 +22,8 @@ buttons.forEach(button => {
             case "operator":
                 // Second operator passed
                 if(logic.currentValue && logic.previousValue && logic.operator) {
-                    const a = parseStringToNumber(logic.currentValue);
-                    const b = parseStringToNumber(logic.previousValue);
+                    const a = parseStringToNumber(logic.previousValue);
+                    const b = parseStringToNumber(logic.currentValue);
                     if(a && b && logic.operator) {
                         logic.calculate(a, b);
                         logic.result = numberToString(logic.result);
@@ -40,8 +40,8 @@ buttons.forEach(button => {
                 }
                 else if(btnValue === "delete") logic.delete();
                 else if(btnValue === "equal") {
-                    const a = parseStringToNumber(logic.currentValue);
-                    const b = parseStringToNumber(logic.previousValue);
+                    const a = parseStringToNumber(logic.previousValue);
+                    const b = parseStringToNumber(logic.currentValue);
                     if(a && b && logic.operator) {
                         logic.calculate(a, b);
                         logic.result = numberToString(logic.result);
