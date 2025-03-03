@@ -18,40 +18,55 @@ buttons.forEach(button => {
             case "number":
                 logic.appendValue(btnValue);
                 display.updateMainDisplay(logic.previousValue, logic.operator, logic.currentValue);
+                display.clearSecondDisplay();
                 break;
             case "operator":
                 // Second operator passed
                 if(logic.currentValue && logic.previousValue && logic.operator) {
                     const a = parseStringToNumber(logic.previousValue);
                     const b = parseStringToNumber(logic.currentValue);
-                    if(a && b && logic.operator) {
-                        logic.calculate(a, b);
+                    if(a && b) {
+                        logic.calculateResult(a, b);
                         logic.result = numberToString(logic.result);
+                        logic.storeResultAsCurrValue(logic.result);
                     }
                 }
-                logic.storeValues();
                 logic.storeOperator(btnValue);
                 display.updateMainDisplay(logic.previousValue, logic.operator, logic.currentValue);
+                display.clearSecondDisplay();
                 break;
             case "action":
-                if(btnValue === "clear") {
-                    logic.reset();
-                    display.clearBothDisplays();
-                }
-                else if(btnValue === "delete") logic.delete();
-                else if(btnValue === "equal") {
-                    const a = parseStringToNumber(logic.previousValue);
-                    const b = parseStringToNumber(logic.currentValue);
-                    if(a && b && logic.operator) {
-                        logic.calculate(a, b);
-                        logic.result = numberToString(logic.result);
-                        logic.storeValues();
+                switch(btnValue) {
+                    case "clear":
+                        logic.reset();
+                        display.clearBothDisplays();
+                        break;
+                    case "delete":
+                        logic.delete();
                         display.updateMainDisplay(logic.previousValue, logic.operator, logic.currentValue);
+                        display.clearSecondDisplay();
+                        break;
+                    case "equal":
+                        if(logic.currentValue && logic.previousValue && logic.operator) {
+                            const a = parseStringToNumber(logic.previousValue);
+                            const b = parseStringToNumber(logic.currentValue);
+                            if(a && b) {
+                                display.updateSecondDisplay(logic.previousValue, logic.operator, logic.currentValue);
+                                logic.calculateResult(a, b);
+                                logic.result = numberToString(logic.result);
+                                logic.storeResultAsCurrValue(logic.result);
+                                display.updateMainDisplay("", "", logic.currentValue);
+                            }
+                        }
+                        break;
                     }
-                }
                 break;
             case "dot":
-                if(logic.currentValue && !logic.currentValue.includes(".")) logic.appendValue(btnValue);
+                if(logic.currentValue && !logic.currentValue.includes(".") && logic.currentValue !== "-") {
+                    logic.appendValue(btnValue);
+                    display.updateMainDisplay(logic.previousValue, logic.operator, logic.currentValue);
+                    display.clearSecondDisplay();
+                }
                 break;
         }
     });

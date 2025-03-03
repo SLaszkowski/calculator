@@ -22,27 +22,28 @@ export default class Logic {
         this.currentValue += valueAsString;
     }
 
-    storeValues() {
-        if(this.result) {
-            this.previousValue = this.result;
-            this.currentValue = "";
+    storeResultAsCurrValue(result) {
+        if(result) {
+            this.currentValue = result;
+            this.previousValue = "";
             this.result = null;
             this.operator = "";
-        } else if(this.currentValue && this.currentValue !== "-") {
-            this.previousValue = this.currentValue;
-            this.currentValue = "";
         }
     }
 
     storeOperator(operator) {
-        if(this.previousValue) {
-            if(this.operators[operator]) this.operator = operator;
-        } else if(!this.currentValue && operator === "-") {
+        if(!this.currentValue && !this.previousValue && operator === "-") { // When minus is pressed as first operator
             this.appendValue(operator);
+        } else if(this.currentValue && this.currentValue !== "-") { // When operator is pressed after a number
+            if(this.operators[operator]) this.operator = operator;
+            this.previousValue = this.currentValue;
+            this.currentValue = "";
+        } else if(this.operator && this.previousValue) { // When operator is pressed after another operator
+            this.operator = operator;
         }
     }
 
-    calculate(a, b) {
+    calculateResult(a, b) {
         if(this.operator) {
             this.result = this.operators[this.operator](a, b);
         }
@@ -56,7 +57,8 @@ export default class Logic {
     }
 
     delete() {
-        this.currentValue = this.currentValue.slice(0, -1);
+        if(this.currentValue) this.currentValue = this.currentValue.slice(0, -1);
+        else if(this.operator) this.operator = "";
+        else if(this.previousValue) this.previousValue = this.previousValue.slice(0, -1);
     }
-
 }

@@ -6,18 +6,14 @@ export default class Display {
     }
 
     updateMainDisplay(previousValue, operator, currentValue) {
-        this.mainDisplay.innerText = previousValue + this.showOperator(operator) + currentValue;
+        this.mainDisplay.innerText = previousValue + this.showOperatorWithSpaces(operator) + currentValue;
     }
 
-    showOperator = operator => operator ? ` ${operator} ` : operator;
-
-    updateSecondDisplay(value) {
-        this.mainDisplay.innerText += value;
+    updateSecondDisplay(previousValue, operator, currentValue) {
+        this.secondDisplay.innerText = previousValue + this.showOperatorWithSpaces(operator) + currentValue + " =";
     }
 
-    clearMainDisplay() {
-        this.mainDisplay.innerText = "";
-    }
+    showOperatorWithSpaces = operator => operator ? ` ${operator} ` : operator;
 
     clearSecondDisplay() {
         this.secondDisplay.innerText = "";
@@ -26,13 +22,5 @@ export default class Display {
     clearBothDisplays() {
         this.mainDisplay.innerText = "";
         this.secondDisplay.innerText = "";
-    }
-
-    showOperationInSecondDisplay(operation) {
-        this.secondDisplay.innerText = operation;
-    }
-
-    showResultInMainDisplay(result) {
-        this.mainDisplay.innerText = result;
     }
 }
