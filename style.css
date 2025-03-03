@@ -35,6 +35,10 @@ body, html {
     height: 19%;
 }
 
+.default-zero {
+    color: #4A4A4A;
+}
+
 .secondDisplay {
     color:#4A4A4A;
     height: 50%;

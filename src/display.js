@@ -3,10 +3,15 @@ export default class Display {
     constructor(mainDisplay, secondDisplay) {
         this.mainDisplay = mainDisplay;
         this.secondDisplay = secondDisplay;
+        this.showDefaultZero();
     }
 
     updateMainDisplay(previousValue, operator, currentValue) {
-        this.mainDisplay.innerText = previousValue + this.showOperatorWithSpaces(operator) + currentValue;
+        if(!previousValue && !operator && !currentValue) this.showDefaultZero();
+        else {
+            this.mainDisplay.classList.remove("default-zero");
+            this.mainDisplay.innerText = previousValue + this.showOperatorWithSpaces(operator) + currentValue;
+        }
     }
 
     updateSecondDisplay(previousValue, operator, currentValue) {
@@ -22,5 +27,11 @@ export default class Display {
     clearBothDisplays() {
         this.mainDisplay.innerText = "";
         this.secondDisplay.innerText = "";
+        this.showDefaultZero();
+    }
+
+    showDefaultZero() {
+        this.mainDisplay.innerText = "0";
+        this.mainDisplay.classList.add("default-zero");
     }
 }
