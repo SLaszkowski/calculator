@@ -7,15 +7,27 @@ export default class Display {
     }
 
     updateMainDisplay(previousValue, operator, currentValue) {
-        if(!previousValue && !operator && !currentValue) this.showDefaultZero();
-        else {
+        if (!previousValue && !operator && !currentValue) {
+            this.showDefaultZero();
+        } else if (
+            (previousValue === "-" && operator && !currentValue) ||
+            (previousValue && !operator && currentValue) ||
+            (!previousValue && operator && currentValue) ||
+            (!previousValue && operator && !currentValue)
+        ) {
+            throw new TypeError("Invalid values passed to update main display: " + previousValue + ", " + operator + ", " + currentValue);
+        } else {
             this.mainDisplay.classList.remove("default-zero");
-            this.mainDisplay.innerText = previousValue + this.showOperatorWithSpaces(operator) + currentValue;
+            this.mainDisplay.innerText = `${previousValue}${this.showOperatorWithSpaces(operator)}${currentValue}`;
         }
     }
 
     updateSecondDisplay(previousValue, operator, currentValue) {
-        this.secondDisplay.innerText = previousValue + this.showOperatorWithSpaces(operator) + currentValue + " =";
+        if(!previousValue || !operator || !currentValue) {
+            throw new TypeError("Invalid values passed to update second display: " + previousValue + ", " + operator + ", " + currentValue);
+        } else {
+            this.secondDisplay.innerText = previousValue + this.showOperatorWithSpaces(operator) + currentValue + " =";
+        }
     }
 
     showOperatorWithSpaces = operator => operator ? ` ${operator} ` : operator;

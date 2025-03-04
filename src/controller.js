@@ -2,9 +2,9 @@ import Display from "./display.js";
 import Logic from "./logic.js";
 import { parseStringToNumber, numberToString  }  from "./validator.js";
 
-const buttons = document.querySelectorAll('.btn');
-const mainDisplay = document.querySelector(".mainDisplay");
-const secondDisplay = document.querySelector(".secondDisplay");
+const buttons = document.querySelectorAll('.calculator__btn');
+const mainDisplay = document.querySelector(".calculator__main-display");
+const secondDisplay = document.querySelector(".calculator__second-display");
 
 const display = new Display(mainDisplay, secondDisplay);
 const logic = new Logic();
