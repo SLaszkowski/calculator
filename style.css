@@ -24,7 +24,7 @@ body, html {
     height: 600px;
 }
 
-.displays {
+.calculator__displays {
     box-sizing: border-box;
     background-color: #1F1F1F;
     color: #FFFFFF;
@@ -39,13 +39,13 @@ body, html {
     color: #4A4A4A;
 }
 
-.secondDisplay {
+.calculator__second-display {
     color:#4A4A4A;
     height: 50%;
     width: 100%;
 }
 
-.buttons {
+.calculator__buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 50px 1fr 1fr 1fr 1fr 50px;
@@ -54,7 +54,7 @@ body, html {
     gap: 3px;
 }
 
-.btn {
+.calculator__btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +66,7 @@ body, html {
     border-radius: 10px;
 }
 
-.btn:hover {
+.calculator__btn:hover {
     transform: scale(1.04);
     box-shadow: 0px 0px 10px 5px #1A1A2E;
     text-shadow: 0px 0px 8px rgb(255, 255, 255);
