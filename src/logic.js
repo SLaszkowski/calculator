@@ -32,14 +32,16 @@ export default class Logic {
     }
 
     storeOperator(operator) {
-        if(!this.currentValue && !this.previousValue && operator === "-") { // When minus is pressed as first operator
-            this.appendValue(operator);
-        } else if(this.currentValue && this.currentValue !== "-") { // When operator is pressed after a number
-            if(this.operators[operator]) this.operator = operator;
-            this.previousValue = this.currentValue;
-            this.currentValue = "";
-        } else if(this.operator && this.previousValue) { // When operator is pressed after another operator
-            this.operator = operator;
+        if(this.operators[operator]) {
+            if(!this.currentValue && !this.previousValue && operator === "-") { // When minus is pressed as first operator
+                this.appendValue(operator);
+            } else if(this.currentValue && this.currentValue !== "-") { // When operator is pressed after a number
+                this.operator = operator;
+                this.previousValue = this.currentValue;
+                this.currentValue = "";
+            } else if(this.operator && this.previousValue) { // When operator is pressed after another operator
+                this.operator = operator;
+            }
         }
     }
 

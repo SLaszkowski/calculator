@@ -91,9 +91,51 @@ describe("Logic class", () => {
         })
     })
 
+    describe("storeResultAsCurrValue", () => {
+        test("should store result as currentValue", () => {
+            logic.storeResultAsCurrValue(55);
+            expect(logic.currentValue).toBe(55);
+            expect(logic.previousValue).toBe("");
+            expect(logic.operator).toBe("");
+            expect(logic.result).toBe(null);
+        })
+
+        test("should not store result if it's null", () => {
+            logic.storeResultAsCurrValue(null);
+            expect(logic.currentValue).toBe("");
+            expect(logic.previousValue).toBe("");
+            expect(logic.operator).toBe("");
+            expect(logic.result).toBe(null);
+        })
+    })
+
     describe("storeOperator", () => {
-        test.each(operators)("should store operator %p", operator => {
+        test("should store minus as first operator", () => {
+            logic.currentValue = "";
+            logic.previousValue = "";
+            logic.storeOperator("-");
+            expect(logic.currentValue).toBe("-");
+        })
+
+        test.each(operators)("should store operator %p after number", operator => {
             logic.currentValue = "55";
+            logic.storeOperator(operator);
+            expect(logic.previousValue).toBe("55");
+            expect(logic.currentValue).toBe("");
+            expect(logic.operator).toBe(operator);
+        })
+
+        test.each(operators)("should not store operator %p after minus", operator => {
+            logic.currentValue = "-";
+            logic.storeOperator(operator);
+            expect(logic.currentValue).toBe("-");
+            expect(logic.operator).toBe("");
+        })
+
+        test.each(operators)("should store operator %p after another operator", operator => {
+            logic.currentValue = "";
+            logic.previousValue = "55";
+            logic.operator = "-";
             logic.storeOperator(operator);
             expect(logic.operator).toBe(operator);
         })
@@ -107,15 +149,15 @@ describe("Logic class", () => {
         });
     })
 
-    describe("calculate", () => {
+    describe("calculateResult", () => {
         test.each(calculateData)("%p %p %p should be equal %p", (a, operator, b, result) => {
             logic.operator = operator;
-            logic.calculate(a, b);
+            logic.calculateResult(a, b);
             expect(logic.result).toBe(result);
         })
 
         test("should return null if operator is not set", () => {
-            logic.calculate(5, 5)
+            logic.calculateResult(5, 5)
             expect(logic.result).toBe(null);
         });
     })
@@ -131,10 +173,33 @@ describe("Logic class", () => {
     })
 
     describe("delete", () => {
-        test.each(deleteData)("%p after delete last char should be %p", (value, slicedValue) => {
-            logic.currentValue = value;
+        test.each(deleteData)("should delete last from currentValue", (currentValue, expectedCurrentValue) => {
+            logic.currentValue = currentValue;
             logic.delete();
-            expect(logic.currentValue).toBe(slicedValue);
+            expect(logic.currentValue).toBe(expectedCurrentValue);
+        })
+
+        test.each(operators)("should delete operator", (operator) => {
+            logic.currentValue = "";
+            logic.operator = operator;
+            logic.delete();
+            expect(logic.operator).toBe("");
+        })
+
+        test.each(deleteData)("should delete last chat from previousValue", (previousValue, expectedPreviousValue) => {
+            logic.previousValue = previousValue;
+            logic.delete();
+            expect(logic.previousValue).toBe(expectedPreviousValue);
+        })
+
+        test("should handle case when all values are empty", () => {
+            logic.currentValue = "";
+            logic.operator = "";
+            logic.previousValue = "";
+            logic.delete();
+            expect(logic.currentValue).toBe("");
+            expect(logic.operator).toBe("");
+            expect(logic.previousValue).toBe("");
         })
     })
 
