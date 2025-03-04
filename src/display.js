@@ -15,7 +15,7 @@ export default class Display {
             (!previousValue && operator && currentValue) ||
             (!previousValue && operator && !currentValue)
         ) {
-            throw new TypeError("Invalid values passed to update main display: " + previousValue + ", " + operator + ", " + currentValue);
+            throw new TypeError(`Invalid values passed to updateMainDisplay function. Arguments: ${previousValue}, ${operator}, ${currentValue}`);
         } else {
             this.mainDisplay.classList.remove("default-zero");
             this.mainDisplay.innerText = `${previousValue}${this.showOperatorWithSpaces(operator)}${currentValue}`;
@@ -24,7 +24,7 @@ export default class Display {
 
     updateSecondDisplay(previousValue, operator, currentValue) {
         if(!previousValue || !operator || !currentValue) {
-            throw new TypeError("Invalid values passed to update second display: " + previousValue + ", " + operator + ", " + currentValue);
+            throw new TypeError(`Invalid values passed to updateSecondDisplay function. Arguments: ${previousValue}, ${operator}, ${currentValue}`);
         } else {
             this.secondDisplay.innerText = previousValue + this.showOperatorWithSpaces(operator) + currentValue + " =";
         }

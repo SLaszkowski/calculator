@@ -13,10 +13,10 @@ const updateMainDisplayData = [
 ]
 
 const updateMainDisplayErrorData = [
-    ["-", "+", "", TypeError, "Invalid values passed to update main display"],
-    ["1", "", "2", TypeError, "Invalid values passed to update main display"],
-    ["", "+", "2", TypeError, "Invalid values passed to update main display"],
-    ["", "*", "", TypeError, "Invalid values passed to update main display"]
+    ["-", "+", "", TypeError, "Invalid values passed to updateMainDisplay function. Arguments: -, +, "],
+    ["1", "", "2", TypeError, "Invalid values passed to updateMainDisplay function. Arguments: 1, , 2"],
+    ["", "+", "2", TypeError, "Invalid values passed to updateMainDisplay function. Arguments: , +, 2"],
+    ["", "*", "", TypeError, "Invalid values passed to updateMainDisplay function. Arguments: , *, "],
 ]
 
 const updateSecondDisplayData = [
@@ -27,11 +27,11 @@ const updateSecondDisplayData = [
 ]
 
 const updateSecondDisplayErrorData = [
-    ["", "", "", TypeError, "Invalid values passed to update second display"],
-    ["", "+", "2", TypeError, "Invalid values passed to update second display"],
-    ["1", "", "2", TypeError, "Invalid values passed to update second display"],
-    ["1", "+", "", TypeError, "Invalid values passed to update second display"],
-    ["", "", "2", TypeError, "Invalid values passed to update second display"]
+    ["", "", "", TypeError, "Invalid values passed to updateSecondDisplay function. Arguments: , ,"],
+    ["", "+", "2", TypeError, "Invalid values passed to updateSecondDisplay function. Arguments: , +, 2"],
+    ["1", "", "2", TypeError, "Invalid values passed to updateSecondDisplay function. Arguments: 1, , 2"],
+    ["1", "+", "", TypeError, "Invalid values passed to updateSecondDisplay function. Arguments: 1, +, "],
+    ["", "", "2", TypeError, "Invalid values passed to updateSecondDisplay function. Arguments: , , 2"]
 ];
 
 describe("Display", () => {
@@ -64,7 +64,7 @@ describe("Display", () => {
 
         test.each(updateMainDisplayErrorData)("should throw error for invalid data passed to main display", (prevValue, operator, currValue, errorType, errorMessage) => {
             expect(() => display.updateMainDisplay(prevValue, operator, currValue)).toThrow(errorType);
-            expect(() => display.updateMainDisplay(prevValue, operator, currValue)).toThrow(`${errorMessage}: ${prevValue}, ${operator}, ${currValue}`);
+            expect(() => display.updateMainDisplay(prevValue, operator, currValue)).toThrow(errorMessage);
         });
 
         test.each(updateSecondDisplayData)("should update second display", (prevValue, operator, currValue, expectInnerText) => {
@@ -74,7 +74,7 @@ describe("Display", () => {
 
         test.each(updateSecondDisplayErrorData)("should throw error for invalid data passed to second display", (prevValue, operator, currValue, errorType, errorMessage) => {
             expect(() => display.updateSecondDisplay(prevValue, operator, currValue)).toThrow(errorType);
-            expect(() => display.updateSecondDisplay(prevValue, operator, currValue)).toThrow(`${errorMessage}: ${prevValue}, ${operator}, ${currValue}`);
+            expect(() => display.updateSecondDisplay(prevValue, operator, currValue)).toThrow(errorMessage);
         });
 
         test("showOperatorWithSpaces should return operator with spaces", () => {
