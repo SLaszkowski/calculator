@@ -110,6 +110,15 @@ describe("Logic class", () => {
     })
 
     describe("storeOperator", () => {
+        test.each(operators)("should not store any operator after dot", (operator) => {
+            [["3232.", ""], ["", "3232."]].forEach(([currentValue, previousValue]) => {
+                logic.currentValue = currentValue;
+                logic.previousValue = previousValue;
+                logic.storeOperator(operator);
+                expect(logic.operator).toBe("");
+            })
+        })
+
         test("should store minus as first operator", () => {
             logic.currentValue = "";
             logic.previousValue = "";
