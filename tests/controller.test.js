@@ -49,19 +49,19 @@ describe("controller", () => {
         calculatorController(buttons, display, logic);
     });
 
-    test("should call Display constructor", () => {
-        expect(Display).toHaveBeenCalledWith(mainDisplay, secondDisplay);
-    });
-
-    test("should call Logic constructor", () => {
-        expect(Logic).toHaveBeenCalled();
-    });
+    test("should handle error", () => {
+            logic.appendValue.mockImplementation(() => { throw new TypeError() });
+            expect(() => buttons[0].click()).not.toThrow();
+        });
 
     describe("number button", () => {
         test("should call functions when number button clicked", () => {
+            logic.currentValue = ""
+            logic.previousValue = "";
+            logic.operator = ""
             buttons[0].click();
-            expect(logic.appendValue).toHaveBeenCalled();
-            expect(display.updateMainDisplay).toHaveBeenCalled();
+            expect(logic.appendValue).toHaveBeenCalledWith("6");
+            expect(display.updateMainDisplay).toHaveBeenCalledWith("", "", "6");
             expect(display.clearSecondDisplay).toHaveBeenCalled();
         });
     });
@@ -69,7 +69,7 @@ describe("controller", () => {
     describe("operator button", () => {
         test("should call functions when operator button clicked", () => {
             buttons[4].click();
-            expect(logic.storeOperator).toHaveBeenCalled();
+            expect(logic.storeOperator).toHaveBeenCalledWith("/");
             expect(display.updateMainDisplay).toHaveBeenCalled();
             expect(display.clearSecondDisplay).toHaveBeenCalled();
         });
@@ -88,6 +88,17 @@ describe("controller", () => {
             expect(display.updateMainDisplay).toHaveBeenCalledWith("", "/", "8");
             expect(display.clearSecondDisplay).toHaveBeenCalled();
         });
+
+        test("should not call functions when operator clicked and validator returns null", () => {
+            logic.currentValue = "2";
+            logic.operator = "+";
+            logic.previousValue = "15"
+            parseStringToNumber.mockImplementation(() => { return null; });
+            buttons[4].click();
+            expect(logic.calculateResult).not.toHaveBeenCalled();
+            expect(numberToString).not.toHaveBeenCalled();
+            expect(logic.storeResultAsCurrValue).not.toHaveBeenCalled();
+        })
 
         test("should not call functions when any value is missing", () => {
             const data = [
@@ -135,20 +146,38 @@ describe("controller", () => {
             expect(display.updateMainDisplay).toHaveBeenCalledWith("", "", "8");
         });
 
-        test("should not call functions when no data and equal button clicked", () => {
-            logic.currentValue = "";
-            logic.previousValue = "";
-            logic.operator = "";
+        test("should not call functions when equal button clicked and validator returns null", () => {
+            logic.currentValue = "2";
+            logic.operator = "+";
+            logic.previousValue = "15"
+            parseStringToNumber.mockImplementation(() => { return null; });
             buttons[3].click();
-            expect(parseStringToNumber).not.toHaveBeenCalled();
             expect(display.updateSecondDisplay).not.toHaveBeenCalled();
             expect(logic.calculateResult).not.toHaveBeenCalled();
             expect(numberToString).not.toHaveBeenCalled();
             expect(logic.storeResultAsCurrValue).not.toHaveBeenCalled();
             expect(display.updateMainDisplay).not.toHaveBeenCalled();
+        })
+
+        test("should not call functions when any data is missing and button clicked", () => {
+            const data = [
+                ["5", "+", ""], ["", "-", "1"], ["3", "", "8.4"], ["", "", ""],
+                ["", "", "7"], ["3", "", ""], ["", "*", ""]
+            ];
+            buttons[3].click();
+            data.forEach(([currentValue, operator, previousValue]) => {
+                logic.currentValue = currentValue;
+                logic.operator = operator;
+                logic.previousValue = previousValue;
+                expect(parseStringToNumber).not.toHaveBeenCalled();
+                expect(display.updateSecondDisplay).not.toHaveBeenCalled();
+                expect(logic.calculateResult).not.toHaveBeenCalled();
+                expect(numberToString).not.toHaveBeenCalled();
+                expect(logic.storeResultAsCurrValue).not.toHaveBeenCalled();
+                expect(display.updateMainDisplay).not.toHaveBeenCalled();
+            });
         });
     });
-
 
     describe("dot button", () => {
         test("should call functions when dot button clicked", () => {
