@@ -1,14 +1,7 @@
-import Display from "./display.js";
-import Logic from "./logic.js";
 import { parseStringToNumber, numberToString  }  from "./validator.js";
 
-export default function calculatorController() {
+export default function calculatorController(display, logic) {
     const buttons = document.querySelectorAll('.calculator__btn');
-    const mainDisplay = document.querySelector(".calculator__main-display");
-    const secondDisplay = document.querySelector(".calculator__second-display");
-
-    const display = new Display(mainDisplay, secondDisplay);
-    const logic = new Logic();
 
     buttons.forEach(button => {
         button.addEventListener("click", (event) => {
