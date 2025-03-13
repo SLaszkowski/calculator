@@ -28,13 +28,12 @@ describe("controller", () => {
         mainDisplay = document.querySelector(".calculator__main-display");
         secondDisplay = document.querySelector(".calculator__second-display");
         buttons = document.querySelectorAll(".calculator__btn");
-
         display = new Display(mainDisplay, secondDisplay);
         logic = new Logic();
+
         // mock validator
         parseStringToNumber.mockImplementation(string => parseFloat(string));
         numberToString.mockImplementation(number => number.toString());
-
         // mock logic
         logic.calculateResult.mockImplementation((a, b) => logic.result = a + b);
         logic.storeOperator.mockImplementation(operator => logic.operator = operator);
@@ -47,7 +46,7 @@ describe("controller", () => {
         });
         logic.appendValue.mockImplementation(value => logic.currentValue += value);
 
-        calculatorController();
+        calculatorController(buttons, display, logic);
     });
 
     test("should call Display constructor", () => {

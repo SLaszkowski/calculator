@@ -1,8 +1,6 @@
 import { parseStringToNumber, numberToString  }  from "./validator.js";
 
-export default function calculatorController(display, logic) {
-    const buttons = document.querySelectorAll('.calculator__btn');
-
+export default function calculatorController(buttons, display, logic) {
     buttons.forEach(button => {
         button.addEventListener("click", (event) => {
             const btnValue = event.target.getAttribute("data-value");
