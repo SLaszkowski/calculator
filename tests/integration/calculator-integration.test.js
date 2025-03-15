@@ -15,6 +15,8 @@ const testData = [
     ["4", "/", "2", "4 / 2 =", "2"]
 ];
 
+const operators = ["+", "*", "/", "-"];
+
 describe("calculator integration tests", () => {
     let mainDisplay, secondDisplay, buttons, display, logic;
     beforeEach(() => {
@@ -48,10 +50,92 @@ describe("calculator integration tests", () => {
         calculatorController(buttons, display, logic);
     })
 
-    test.each(testData)("should calculate result correctly and show in both displays", (button1, button2, button3, expectSecondDisplay, expectMainDisplay) => {
-        clickButtonsbyDataValue(button1, button2, button3, "equal");
-        expect(display.secondDisplay.innerText).toBe(expectSecondDisplay)
-        expect(display.mainDisplay.innerText).toBe(expectMainDisplay)
-        clickButtonsbyDataValue("clear");
+    describe("number", () => {
+        const testDataNumber = [
+            ["3", "1", "31"],
+            ["8", "2", "82"],
+            ["5", "9", "59"]
+        ];
+        test.each(testDataNumber)("should show pressed number", (num1, num2, result ) => {
+            clickButtonsbyDataValue(num1, num2);
+            expect(display.mainDisplay.innerText).toBe(result);
+            expect(display.secondDisplay.innerText).toBe("");
+        })
     })
+
+    describe("operator", () => {
+        test.each(testData)("should show or change operator after number", (button, operator) => {
+            clickButtonsbyDataValue(button, operator);
+            expect(logic.operator).toBe(operator);
+            expect(display.mainDisplay.innerText).toBe(`${button} ${operator} `);
+            expect(display.secondDisplay.innerText).toBe("");
+            clickButtonsbyDataValue("clear");
+        })
+
+        test("should not store operator after minus", () => {
+            clickButtonsbyDataValue("-");
+            operators.forEach(operator => {
+                clickButtonsbyDataValue(operator);
+                expect(logic.operator).toBe("");
+                expect(display.mainDisplay.innerText).toBe("-");
+                expect(display.secondDisplay.innerText).toBe("");
+            })
+        })
+
+        test("should not store and show operator as first value except to minus", () => {
+            operators.forEach(operator => {
+                if(operator === "-") {
+                    clickButtonsbyDataValue(operator)
+                    expect(logic.operator).toBe("");
+                    expect(display.mainDisplay.innerText).toBe("-");
+                    expect(display.secondDisplay.innerText).toBe("");
+                } else {
+                    clickButtonsbyDataValue(operator);
+                    expect(logic.operator).toBe("");
+                    expect(display.mainDisplay.innerText).toBe("0");
+                    expect(display.secondDisplay.innerText).toBe("");
+                }
+            });
+        })
+
+        test("should store operator and calculate result when second operator pressed", () => {
+            logic.previousValue = "75";
+            logic.operator = "-";
+            logic.currentValue = "32";
+            clickButtonsbyDataValue("*");
+            expect(logic.operator).toBe("*");
+            expect(display.mainDisplay.innerText).toBe("43 * ")
+            expect(display.secondDisplay.innerText).toBe("")
+        })
+
+
+    })
+
+    describe("action", () => {
+        describe("clear", () => {
+            test("should clear displays, show default value and reset logic values", () => {
+                const buttonsToClick = [
+                    ["5"], ["2", "+"], ["1", "*", "6"], ["1", "*", "6", "equal"]
+                ]
+                buttonsToClick.forEach(button => {
+                    clickButtonsbyDataValue(...button);
+                    clickButtonsbyDataValue("clear");
+                    expect(logic.currentValue).toBe("");
+                    expect(logic.previousValue).toBe("");
+                    expect(logic.operator).toBe("");
+                    expect(logic.result).toBe(null);
+                    expect(display.mainDisplay.innerText).toBe("0");
+                    expect(display.secondDisplay.innerText).toBe("");
+                })
+
+            })
+        })
+        test.each(testData)("should calculate result correctly and show in both displays", (button1, button2, button3, expectSecondDisplay, expectMainDisplay) => {
+            clickButtonsbyDataValue(button1, button2, button3, "equal");
+            expect(display.secondDisplay.innerText).toBe(expectSecondDisplay)
+            expect(display.mainDisplay.innerText).toBe(expectMainDisplay)
+            clickButtonsbyDataValue("clear");
+        })
+    })
+
 })
