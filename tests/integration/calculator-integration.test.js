@@ -118,8 +118,7 @@ describe("calculator integration tests", () => {
                     ["5"], ["2", "+"], ["1", "*", "6"], ["1", "*", "6", "equal"]
                 ]
                 buttonsToClick.forEach(button => {
-                    clickButtonsbyDataValue(...button);
-                    clickButtonsbyDataValue("clear");
+                    clickButtonsbyDataValue(...button, "clear");
                     expect(logic.currentValue).toBe("");
                     expect(logic.previousValue).toBe("");
                     expect(logic.operator).toBe("");
@@ -130,6 +129,18 @@ describe("calculator integration tests", () => {
 
             })
         })
+
+        describe("delete", () => {
+            const deleteData = [
+                ["5", "5", "+"], ["0", "8"], ["22.", "2", "2", ".", "1"], ["-2", "-", "2", "4"], ["-", "-", "9"], ["0"]
+            ]
+            test.each(deleteData)("should delete last element", (expected, ...buttons) => {
+                clickButtonsbyDataValue(...buttons, "delete");
+                expect(display.mainDisplay.innerText).toBe(expected);
+                expect(display.secondDisplay.innerText).toBe("");
+            })
+        })
+
         test.each(testData)("should calculate result correctly and show in both displays", (button1, button2, button3, expectSecondDisplay, expectMainDisplay) => {
             clickButtonsbyDataValue(button1, button2, button3, "equal");
             expect(display.secondDisplay.innerText).toBe(expectSecondDisplay)
