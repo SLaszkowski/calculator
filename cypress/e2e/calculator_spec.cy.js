@@ -6,32 +6,32 @@ const clickButtons = (...buttonsSet) => {
 const secondDisplay = '.calculator__second-display';
 const mainDisplay = '.calculator__main-display';
 
-const testCases = [
-  {
-    buttons: ["4", "+", "9", "equal"],
-    expectedEquation: "4 + 9 =",
-    expectedResult: "13"
-  },
-  {
-    buttons: ["3", ".", "6", "6", "+", "9", ".", "1", "1", "equal"],
-    expectedEquation: "3.66 + 9.11 =",
-    expectedResult: "12.77"
-  }
-]
-
 describe("calculator autotests", () => {
-  before(() => cy.visit('http://127.0.0.1:5500/index.html'))
+  beforeEach(function() {
+    cy.visit('http://127.0.0.1:5500/index.html')
+    cy.fixture('calc_operations').then((data) => {
+      this.data = data;
+    });
+  })
 
-  describe('basic operations', () => {
+  describe('operations', () => {
+    it('should perform basic operations', function() {
+        this.data.basicOperations.forEach(({buttons, expectedEquation, expectedResult}) => {
+          clickButtons(...buttons);
+          cy.get(secondDisplay).should('have.text', expectedEquation);
+          cy.get(mainDisplay).should('have.text', expectedResult);
+          clickButtons("clear");
+        })
+    })
 
-    it('should perform operations', () => {
-      testCases.forEach(({buttons, expectedEquation, expectedResult}) => {
+    it('should perform edge operations', function() {
+      this.data.edgeOperations.forEach(({buttons, expectedEquation, expectedResult}) => {
         clickButtons(...buttons);
         cy.get(secondDisplay).should('have.text', expectedEquation);
         cy.get(mainDisplay).should('have.text', expectedResult);
         clickButtons("clear");
       })
-    })
+  })
   })
 })
 

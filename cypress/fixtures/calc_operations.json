@@ -1,0 +1,36 @@
+{
+    "basicOperations": [
+      {
+        "buttons": ["4", "+", "9", "equal"],
+        "expectedEquation": "4 + 9 =",
+        "expectedResult": "13"
+      },
+      {
+        "buttons": ["3", ".", "6", "6", "+", "9", ".", "1", "1", "equal"],
+        "expectedEquation": "3.66 + 9.11 =",
+        "expectedResult": "12.77"
+      },
+      {
+        "buttons": ["8", "-", "2", "equal"],
+        "expectedEquation": "8 - 2 =",
+        "expectedResult": "6"
+      },
+      {
+        "buttons": ["7", "*", "5", "equal"],
+        "expectedEquation": "7 * 5 =",
+        "expectedResult": "35"
+      },
+      {
+        "buttons": ["9", "/", "3", "equal"],
+        "expectedEquation": "9 / 3 =",
+        "expectedResult": "3"
+      }
+    ],
+    "edgeOperations": [
+      {
+        "buttons": ["4", "/", "0", "equal"],
+        "expectedEquation": "",
+        "expectedResult": "4 / 0"
+      }
+    ]
+  }
