@@ -1,10 +1,18 @@
+const secondDisplay = '.calculator__second-display';
+const mainDisplay = '.calculator__main-display';
+
 const clickButtons = (...buttonsSet) => {
-  cy.log(buttonsSet)
   buttonsSet.forEach(button => cy.get(`[data-value="${button}"]`).click());
 }
 
-const secondDisplay = '.calculator__second-display';
-const mainDisplay = '.calculator__main-display';
+function performTests(data) {
+  data.forEach(({buttons, expectedEquation, expectedResult}) => {
+    clickButtons(...buttons);
+    cy.get(secondDisplay).should('have.text', expectedEquation);
+    cy.get(mainDisplay).should('have.text', expectedResult);
+    clickButtons("clear");
+  })
+};
 
 describe("calculator autotests", () => {
   beforeEach(function() {
@@ -15,23 +23,43 @@ describe("calculator autotests", () => {
   })
 
   describe('operations', () => {
-    it('should perform basic operations', function() {
-        this.data.basicOperations.forEach(({buttons, expectedEquation, expectedResult}) => {
-          clickButtons(...buttons);
-          cy.get(secondDisplay).should('have.text', expectedEquation);
-          cy.get(mainDisplay).should('have.text', expectedResult);
-          clickButtons("clear");
-        })
+    it('should perform basic operation cases', function() {
+        performTests(this.data.basicOperations);
     })
 
-    it('should perform edge operations', function() {
-      this.data.edgeOperations.forEach(({buttons, expectedEquation, expectedResult}) => {
-        clickButtons(...buttons);
-        cy.get(secondDisplay).should('have.text', expectedEquation);
-        cy.get(mainDisplay).should('have.text', expectedResult);
-        clickButtons("clear");
-      })
+    it('should perform zero operations cases', function() {
+      performTests(this.data.zeroOperations)
+    })
+
+    it('should perform fraction operations cases', function() {
+      performTests(this.data.fractionOperations)
+    })
+
+    it('should perform negative numbers operations cases', function() {
+      performTests(this.data.negativeNumbers)
+    })
+
+    it('should perform large numbers operations cases', function() {
+      performTests(this.data.largeNumbers)
+    })
   })
+
+  describe("error cases", () => {
+    it('should perform error cases', function() {
+      performTests(this.data.errorCases)
+    })
+  })
+
+  describe("clear action", () => {
+    it('should handle using clear button cases', function() {
+      performTests(this.data.clearCases)
+    })
+  })
+
+  describe("delete action", () => {
+    it('should handle using delete button cases', function() {
+      performTests(this.data.deleteCases)
+    })
   })
 })
 

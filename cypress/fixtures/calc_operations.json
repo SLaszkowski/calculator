@@ -1,36 +1,213 @@
 {
-    "basicOperations": [
-      {
-        "buttons": ["4", "+", "9", "equal"],
-        "expectedEquation": "4 + 9 =",
-        "expectedResult": "13"
-      },
-      {
-        "buttons": ["3", ".", "6", "6", "+", "9", ".", "1", "1", "equal"],
-        "expectedEquation": "3.66 + 9.11 =",
-        "expectedResult": "12.77"
-      },
-      {
-        "buttons": ["8", "-", "2", "equal"],
-        "expectedEquation": "8 - 2 =",
-        "expectedResult": "6"
-      },
-      {
-        "buttons": ["7", "*", "5", "equal"],
-        "expectedEquation": "7 * 5 =",
-        "expectedResult": "35"
-      },
-      {
-        "buttons": ["9", "/", "3", "equal"],
-        "expectedEquation": "9 / 3 =",
-        "expectedResult": "3"
-      }
-    ],
-    "edgeOperations": [
-      {
-        "buttons": ["4", "/", "0", "equal"],
-        "expectedEquation": "",
-        "expectedResult": "4 / 0"
-      }
-    ]
-  }
+  "basicOperations": [
+    {
+      "buttons": ["4", "+", "9", "equal"],
+      "expectedEquation": "4 + 9 =",
+      "expectedResult": "13"
+    },
+    {
+      "buttons": ["3", ".", "6", "6", "+", "9", ".", "1", "1", "equal"],
+      "expectedEquation": "3.66 + 9.11 =",
+      "expectedResult": "12.77"
+    },
+    {
+      "buttons": ["8", "-", "2", "equal"],
+      "expectedEquation": "8 - 2 =",
+      "expectedResult": "6"
+    },
+    {
+      "buttons": ["7", "*", "5", "equal"],
+      "expectedEquation": "7 * 5 =",
+      "expectedResult": "35"
+    },
+    {
+      "buttons": ["9", "/", "3", "equal"],
+      "expectedEquation": "9 / 3 =",
+      "expectedResult": "3"
+    }
+  ],
+  "zeroOperations": [
+    {
+      "buttons": ["0", "+", "5", "equal"],
+      "expectedEquation": "0 + 5 =",
+      "expectedResult": "5"
+    },
+    {
+      "buttons": ["5", "-", "0", "equal"],
+      "expectedEquation": "5 - 0 =",
+      "expectedResult": "5"
+    },
+    {
+      "buttons": ["0", "*", "7", "equal"],
+      "expectedEquation": "0 * 7 =",
+      "expectedResult": "0"
+    },
+    {
+      "buttons": ["0", "/", "3", "equal"],
+      "expectedEquation": "0 / 3 =",
+      "expectedResult": "0"
+    }
+  ],
+  "fractionOperations": [
+    {
+      "buttons": ["0", ".", "2", "+", "0", ".", "3", "equal"],
+      "expectedEquation": "0.2 + 0.3 =",
+      "expectedResult": "0.5"
+    },
+    {
+      "buttons": ["5", ".", "5", "*", "2", ".", "2", "equal"],
+      "expectedEquation": "5.5 * 2.2 =",
+      "expectedResult": "12.1"
+    }
+  ],
+  "negativeNumbers": [
+    {
+      "buttons": ["5", "-", "8", "equal"],
+      "expectedEquation": "5 - 8 =",
+      "expectedResult": "-3"
+    },
+    {
+      "buttons": ["-", "5", "+", "3", "equal"],
+      "expectedEquation": "-5 + 3 =",
+      "expectedResult": "-2"
+    },
+    {
+      "buttons": ["-", "2", "*", "4", "equal"],
+      "expectedEquation": "-2 * 4 =",
+      "expectedResult": "-8"
+    },
+    {
+      "buttons": ["-", "6", "/", "3", "equal"],
+      "expectedEquation": "-6 / 3 =",
+      "expectedResult": "-2"
+    }
+  ],
+  "largeNumbers": [
+    {
+      "buttons": ["9", "9", "9", "9", "9", "9", "*", "9", "9", "9", "9", "9", "9", "equal"],
+      "expectedEquation": "999999 * 999999 =",
+      "expectedResult": "999998000001"
+    },
+    {
+      "buttons": ["9", "9", "9", "9", "9", "9", "9", "/", "1", "equal"],
+      "expectedEquation": "9999999 / 1 =",
+      "expectedResult": "9999999"
+    }
+  ],
+  "errorCases": [
+    {
+      "buttons": ["4", "/", "0", "equal"],
+      "expectedEquation": "",
+      "expectedResult": "4 / 0"
+    },
+    {
+      "buttons": ["0", "/", "0", "equal"],
+      "expectedEquation": "",
+      "expectedResult": "0 / 0"
+    },
+    {
+      "buttons": ["5", "+", "*", "3", "equal"],
+      "expectedEquation": "5 * 3 =",
+      "expectedResult": "15"
+    },
+    {
+      "buttons": ["3", "equal"],
+      "expectedEquation": "",
+      "expectedResult": "3"
+    },
+    {
+      "buttons": [".", "equal"],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    },
+    {
+      "buttons": ["-", "-"],
+      "expectedEquation": "",
+      "expectedResult": "-"
+    },
+    {
+      "buttons": [".", "."],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    },
+    {
+      "buttons": ["5", ".", "9", "+", "."],
+      "expectedEquation": "",
+      "expectedResult": "5.9 + "
+    },
+    {
+      "buttons": ["5", "-", "9", ".", "."],
+      "expectedEquation": "",
+      "expectedResult": "5 - 9."
+    }
+  ],
+  "clearCases": [
+    {
+      "buttons": ["4", "clear"],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    },
+    {
+      "buttons": ["9", "+", "3", "clear"],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    },
+    {
+      "buttons": ["5", "*", "2", "equal", "clear"],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    },
+    {
+      "buttons": ["4", "clear", "7", "+", "3", "equal"],
+      "expectedEquation": "7 + 3 =",
+      "expectedResult": "10"
+    },
+    {
+      "buttons": ["9", "clear", "clear"],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    }
+  ],
+  "deleteCases": [
+    {
+      "buttons": ["4", "delete"],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    },
+    {
+      "buttons": ["9", "3", "delete"],
+      "expectedEquation": "",
+      "expectedResult": "9"
+    },
+    {
+      "buttons": ["5", "*", "2", "delete"],
+      "expectedEquation": "",
+      "expectedResult": "5 * "
+    },
+    {
+      "buttons": ["7", ".", "8", "delete"],
+      "expectedEquation": "",
+      "expectedResult": "7."
+    },
+    {
+      "buttons": ["3", "+", "9", "delete"],
+      "expectedEquation": "",
+      "expectedResult": "3 + "
+    },
+    {
+      "buttons": ["8", "+", "delete"],
+      "expectedEquation": "",
+      "expectedResult": "8"
+    },
+    {
+      "buttons": ["4", "delete", "delete"],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    },
+    {
+      "buttons": ["9", "3", "delete", "delete"],
+      "expectedEquation": "",
+      "expectedResult": "0"
+    }
+  ]
+}
