@@ -17,7 +17,9 @@ export default function calculatorController(buttons, display, logic) {
                         if(logic.currentValue && logic.previousValue && logic.operator) {
                             const a = parseStringToNumber(logic.previousValue);
                             const b = parseStringToNumber(logic.currentValue);
-                            if(a && b) {
+                            const isDivisionByZero = logic.operator === "/" && b === 0;
+                            const isNumberValid = a !== null && b !== null;
+                            if(!isDivisionByZero && isNumberValid) {
                                 logic.calculateResult(a, b);
                                 logic.result = numberToString(logic.result);
                                 logic.storeResultAsCurrValue(logic.result);
@@ -42,7 +44,9 @@ export default function calculatorController(buttons, display, logic) {
                                 if(logic.currentValue && logic.previousValue && logic.operator) {
                                     const a = parseStringToNumber(logic.previousValue);
                                     const b = parseStringToNumber(logic.currentValue);
-                                    if(a && b) {
+                                    const isDivisionByZero = logic.operator === "/" && b === 0;
+                                    const isNumberValid = a !== null && b !== null;
+                                    if(!isDivisionByZero && isNumberValid) {
                                         display.updateSecondDisplay(logic.previousValue, logic.operator, logic.currentValue);
                                         logic.calculateResult(a, b);
                                         logic.result = numberToString(logic.result);

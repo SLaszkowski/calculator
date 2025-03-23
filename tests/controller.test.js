@@ -100,6 +100,16 @@ describe("controller", () => {
             expect(logic.storeResultAsCurrValue).not.toHaveBeenCalled();
         })
 
+        test("should not call functions when divide by zero detected", () => {
+            logic.currentValue = "0";
+            logic.operator = "/";
+            logic.previousValue = "15"
+            buttons[4].click();
+            expect(logic.calculateResult).not.toHaveBeenCalled();
+            expect(numberToString).not.toHaveBeenCalled();
+            expect(logic.storeResultAsCurrValue).not.toHaveBeenCalled();
+        })
+
         test("should not call functions when any value is missing", () => {
             const data = [
                 ["5", "+", ""], ["", "-", "1"], ["3", "", "8.4"], ["", "", ""],
