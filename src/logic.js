@@ -19,7 +19,9 @@ export default class Logic {
     }
 
     appendValue(valueAsString) {
-        this.currentValue += valueAsString;
+        if(this.currentValue.length < this.precision) {
+            this.currentValue += valueAsString;
+        }
     }
 
     storeResultAsCurrValue(result) {

@@ -1,6 +1,6 @@
 import Logic from "../src/logic"
 
-const inputData = ["1", "2", "5", "0", "1", "2", "5", "33", "222"];
+const inputData = ["1", "2", "5", "0", "1", "2", "3", "4"];
 const operators = ["+", "-", "*", "/"]
 const calculateData = [
     [5, "+", 5, 10],
@@ -87,7 +87,13 @@ describe("Logic class", () => {
     describe("appendValue", () => {
         test("should append new string", () => {
             inputData.forEach(input => logic.appendValue(input))
-            expect(logic.currentValue).toBe("125012533222");
+            expect(logic.currentValue).toBe("12501234");
+        });
+
+        test("should not append more values than specified as precision", () => {
+            logic.currentValue = "999999996";
+            logic.appendValue("3");
+            expect(logic.currentValue).toBe("999999996");
         })
     })
 
