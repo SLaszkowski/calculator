@@ -51,7 +51,9 @@ describe("controller", () => {
 
     test("should handle error", () => {
             logic.appendValue.mockImplementation(() => { throw new TypeError() });
+            jest.spyOn(console, "error").mockImplementation(() => {});
             expect(() => buttons[0].click()).not.toThrow();
+            expect(console.error).toHaveBeenCalled();
         });
 
     describe("number button", () => {
