@@ -26,11 +26,12 @@ A simple calculator application created mainly to learn the basics of unit, inte
   ```bash
   npm install
   ```
-- **Unit and Integration Tests**: Run with Jest:
+- ### **Unit and Integration Tests**:
+  Run with Jest:
   ```bash
   npm test
   ```
-- **E2E Tests**:
+- ### **E2E Tests**:
   Run E2E Cypress tests with GUI:
   ```bash
   npm run e2e
