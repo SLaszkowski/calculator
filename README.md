@@ -2,7 +2,7 @@
 
 A simple calculator application created mainly to learn the basics of unit, integration, and end-to-end (E2E) testing.
 
-## Technologies Used
+## Used Technologies
 - **Vanilla JavaScript (ES6+)**, **HTML5**, **CSS**
 - **Jest** for Unit and Integration Testing
 - **Cypress** for E2E Testing
@@ -21,6 +21,7 @@ A simple calculator application created mainly to learn the basics of unit, inte
 
 ## How to Run Tests
 - Install last stable version of Node.js https://nodejs.org
+- Run `Live Server`
 - **Install npm**
   ```bash
   npm install
@@ -29,7 +30,8 @@ A simple calculator application created mainly to learn the basics of unit, inte
   ```bash
   npm test
   ```
-- **E2E Tests**: Run with Cypress GUI:
+- **E2E Tests**:
+  Run E2E Cypress tests with GUI:
   ```bash
   npm run e2e
   ```
