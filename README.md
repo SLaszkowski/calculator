@@ -42,4 +42,4 @@ A simple calculator application created mainly to learn the basics of unit, inte
   ```
 
 ## Demo
-<img src="assets/calculatorDemo.gif" width="400" alt="Calculator Demo">
+<img src="assets/calculator_demo.gif" width="400" alt="calculator demo">
