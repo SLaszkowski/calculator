@@ -16,7 +16,10 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "e2e": "cypress open"
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "e2e": "cypress open",
+    "cypress:headless": "cypress run --headless"
   },
   "jest": {
     "testEnvironment": "jest-environment-jsdom",

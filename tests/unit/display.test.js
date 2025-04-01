@@ -1,4 +1,4 @@
-import Display from "../src/display";
+import Display from "../../src/display";
 
 const updateMainDisplayData = [
     ["", "", "", "0", true],

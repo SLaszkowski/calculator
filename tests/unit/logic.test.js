@@ -1,4 +1,4 @@
-import Logic from "../src/logic"
+import Logic from "../../src/logic"
 
 const inputData = ["1", "2", "5", "0", "1", "2", "3", "4"];
 const operators = ["+", "-", "*", "/"]

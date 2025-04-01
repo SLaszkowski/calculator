@@ -1,11 +1,11 @@
-import Display from "../src/display.js";
-import Logic from "../src/logic.js";
-import calculatorController from "../src/controller.js";
-import { parseStringToNumber, numberToString  }  from "../src/validator.js";
+import Display from "../../src/display.js";
+import Logic from "../../src/logic.js";
+import calculatorController from "../../src/controller.js";
+import { parseStringToNumber, numberToString  }  from "../../src/validator.js";
 
-jest.mock("../src/logic.js");
-jest.mock("../src/display.js");
-jest.mock("../src/validator.js");
+jest.mock("../../src/logic.js");
+jest.mock("../../src/display.js");
+jest.mock("../../src/validator.js");
 
 describe("controller", () => {
     let mainDisplay, secondDisplay, buttons, display, logic;

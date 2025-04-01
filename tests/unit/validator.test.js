@@ -1,4 +1,4 @@
-import { parseStringToNumber, numberToString  }  from "../src/validator";
+import { parseStringToNumber, numberToString  }  from "../../src/validator";
 
 const parseStringToNumberData = [
     ["abcd", null],
