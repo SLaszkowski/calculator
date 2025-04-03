@@ -15,7 +15,7 @@
   "scripts": {
     "start": "npx http-server ./ -p 5500",
     "test": "jest",
-    "test:unit": "jest tests/unit --coverage",
+    "test:unit": "jest tests/unit --ci --coverage",
     "test:integration": "jest tests/integration",
     "e2e": "cypress open",
     "cypress:headless": "cypress run --headless"

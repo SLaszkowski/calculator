@@ -7,6 +7,11 @@ A simple calculator application created mainly to learn the basics of unit, inte
 - **Jest** for Unit and Integration Testing
 - **Cypress** for E2E Testing
 
+## Test Results
+[![Jest Unit Tests](https://github.com/SLaszkowski/calculator/actions/workflows/jest-unit-tests.yml/badge.svg)](https://github.com/SLaszkowski/calculator/actions/workflows/jest-unit-tests.yml)
+[![Jest Integration Tests](https://github.com/SLaszkowski/calculator/actions/workflows/jest-integration-tests.yml/badge.svg)](https://github.com/SLaszkowski/calculator/actions/workflows/jest-integration-tests.yml)
+[![Cypress E2E Tests](https://github.com/SLaszkowski/calculator/actions/workflows/cypress-e2e-tests.yml/badge.svg)](https://github.com/SLaszkowski/calculator/actions/workflows/cypress-e2e-tests.yml)
+
 ## How to Run Calculator
 1. Clone the repository:
     ```bash
