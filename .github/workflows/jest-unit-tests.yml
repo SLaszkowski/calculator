@@ -24,3 +24,7 @@ jobs:
     # Jest unit tests
     - name: Run Jest unit-tests
       run: npm run test:unit
+
+    # Add coverage badge
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
