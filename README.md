@@ -9,36 +9,35 @@ A simple calculator application created mainly to learn the basics of unit, inte
 
 ## How to Run Calculator
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/SLaszkowski/calculator.git
-   ```
+    ```bash
+    git clone https://github.com/SLaszkowski/calculator.git
+    ```
 2. Navigate to the project directory:
-   ```bash
-   cd calculator
-   ```
-3. Open `Visual studio code` -> install `Live Server` VSC extension
-4. Right-click on the `index.html` and select `Open with Live Server` to use the calculator.
+    ```bash
+    cd calculator
+    ```
+3. Run local server
+    ```bash
+    npm start
+    ```
+4. Open Calculator http://localhost:5500/
 
 ## How to Run Tests
 - Install last stable version of Node.js https://nodejs.org
-- Run `Live Server`
-- **Install npm**
+- Install npm
   ```bash
   npm install
   ```
-- ### **Unit and Integration Tests**:
+- #### **Unit and Integration Tests**:
   Run with Jest:
   ```bash
   npm test
   ```
-- ### **E2E Tests**:
-  Run E2E Cypress tests with GUI:
+- #### **E2E Tests**:
+  Run E2E Cypress tests:
   ```bash
-  npm run e2e
-  ```
-  or in headless mode:
-  ```bash
-  npx cypress run
+  npm start
+  npm run cypress:headless
   ```
 
 ## Demo
